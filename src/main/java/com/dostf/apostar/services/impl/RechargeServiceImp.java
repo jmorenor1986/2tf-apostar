@@ -19,7 +19,7 @@ public class RechargeServiceImp implements IRechargeService {
 	private final RestTemplate restTemplate;
 	private final HttpEntity<String> addHeaders;
 
-	@Value("${operations.service}{operations.serviceRecharge}")
+	@Value("${operations.service}${operations.serviceRecharge}")
 	private String uri;
 
 	@Autowired
@@ -33,7 +33,7 @@ public class RechargeServiceImp implements IRechargeService {
 		rechargeData.validateDataMandatory();
 		try {
 			return restTemplate.exchange(uri, HttpMethod.POST, addHeaders, Object.class);
-		} catch (ServiceNotAvailableException e) {
+		} catch (Exception e) {
 			String mensaje = RequestEnum.SERVICE_NOT_AVAILABLE.getMessage().replace("{URL}", uri);
 			throw new ServiceNotAvailableException(mensaje);
 		}

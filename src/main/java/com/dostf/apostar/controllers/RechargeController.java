@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dostf.apostar.common.exceptions.ServiceNotAvailableException;
 import com.dostf.apostar.dtos.RechargeDto;
 import com.dostf.apostar.services.IRechargeService;
 
@@ -18,7 +19,7 @@ public class RechargeController {
 	private IRechargeService rechargeService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object rechargePhone(@RequestBody RechargeDto rechargeDto) {
+	public Object rechargePhone(@RequestBody RechargeDto rechargeDto) throws ServiceNotAvailableException {
 		return rechargeService.recharge(rechargeDto);
 	}
 	
