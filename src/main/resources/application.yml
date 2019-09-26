@@ -1,0 +1,10 @@
+#Configuration server
+server:
+       servlet: 
+                context-path: /dostf-apostar
+       port: 5000
+#url consume service
+operations:
+           service: http:http://172.17.254.17/web-services-seta-apostar/api
+           serviceRecharge: /recarga/recargar
+
