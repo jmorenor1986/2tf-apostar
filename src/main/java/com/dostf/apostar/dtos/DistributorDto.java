@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 public class DistributorDto {
 	private String indentificador;
-
 	private Long usuarioId;
 	private String clienteId;
 	private String equipoClienteId;
@@ -21,7 +20,7 @@ public class DistributorDto {
 
 	/**
 	 * validate the mandatory fields of distributor
-	 * 
+	 *
 	 * @param distributor
 	 * @throws MandatoryFieldsMissingException
 	 */

@@ -1,27 +1,15 @@
 package com.dostf.apostar.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "operaciones.api")
 public class OperacionesProperties {
   private String urlBase;
   private RecargasProperties recargas;
-
-  public String getUrlBase() {
-    return urlBase;
-  }
-
-  public void setUrlBase(String urlBase) {
-    this.urlBase = urlBase;
-  }
-
-  public RecargasProperties getRecargas() {
-    return recargas;
-  }
-
-  public void setRecargas(RecargasProperties recargas) {
-    this.recargas = recargas;
-  }
 }

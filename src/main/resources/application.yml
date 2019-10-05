@@ -4,6 +4,10 @@ operaciones:
     recargas:
       urlBase: /recarga
       urlRecargar: /recargar
+    betplay:
+      urlBase: /betplay
+      urlBetPlay: /asdasd
+      urlDos: /ased
 
 server:
   servlet:
