@@ -11,15 +11,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 @Getter
 @Setter
+@XmlRootElement
 public class RechargeDto {
   private DistribuidorProperties distribuidor;
   private String numero;
   @JsonProperty("codigo-subproducto")
+  @XmlElement(name = "codigo-subproducto")
   private String codigoSubproducto;
   private Double valor;
   @JsonProperty("transaction-distribuidor-id")
+  @XmlElement(name = "transaction-distribuidor-id")
   private Long transaccionDistribuidorId;
 
   /**

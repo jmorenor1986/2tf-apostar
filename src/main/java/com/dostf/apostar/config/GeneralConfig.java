@@ -2,6 +2,7 @@ package com.dostf.apostar.config;
 
 import java.util.Arrays;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class GeneralConfig {
   public HttpEntity<String> addHeaders() {
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Arrays.asList(MediaType.APPLICATION_XML));
+    headers.setContentType(MediaType.APPLICATION_XML);
     return new HttpEntity<String>("parameters", headers);
   }
 
