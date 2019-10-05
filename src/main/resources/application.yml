@@ -8,6 +8,13 @@ operaciones:
       urlBase: /betplay
       urlBetPlay: /asdasd
       urlDos: /ased
+distribuidor:
+  identificador: identificador
+  usuarioId: usuarioId
+  clienteId: clienteId
+  equipoClienteId: equipoClienteId
+  llave: llave
+  clave: clave
 
 server:
   servlet:

@@ -1,6 +1,7 @@
 package com.dostf.apostar.services.impl;
 
-import com.dostf.apostar.config.OperacionesProperties;
+import com.dostf.apostar.config.properties.DistribuidorProperties;
+import com.dostf.apostar.config.properties.OperacionesProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,8 @@ public class RechargeServiceImp implements IRechargeService {
 
 	private final RestTemplate restTemplate;
 	private final HttpEntity<String> addHeaders;
+	@Autowired
+	private DistribuidorProperties distribuidor;
 
 	private String uri;
 
@@ -31,6 +34,7 @@ public class RechargeServiceImp implements IRechargeService {
 
 	@Override
 	public Object recharge(RechargeDto rechargeData) throws MandatoryFieldsMissingException {
+		rechargeData.setDistribuidor(distribuidor);
 		rechargeData.validateDataMandatory();
 		try {
 			return restTemplate.exchange(uri, HttpMethod.POST, addHeaders, Object.class);

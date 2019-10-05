@@ -1,4 +1,4 @@
-package com.dostf.apostar.config;
+package com.dostf.apostar.config.properties;
 
 import lombok.Getter;
 import lombok.Setter;
