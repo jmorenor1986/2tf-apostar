@@ -1,7 +1,7 @@
 package com.dostf.apostar.services.impl;
 
+import com.dostf.apostar.config.OperacionesProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -19,13 +19,14 @@ public class RechargeServiceImp implements IRechargeService {
 	private final RestTemplate restTemplate;
 	private final HttpEntity<String> addHeaders;
 
-	@Value("${operations.service}${operations.serviceRecharge}")
 	private String uri;
 
 	@Autowired
-	public RechargeServiceImp(RestTemplate restTemplate, HttpEntity<String> addHeaders) {
+	public RechargeServiceImp(RestTemplate restTemplate, HttpEntity<String> addHeaders, OperacionesProperties properties) {
+		this.uri = properties.getUrlBase() + properties.getRecargas().getUrlBase() + properties.getRecargas().getUrlRecargar();
 		this.restTemplate = restTemplate;
 		this.addHeaders = addHeaders;
+
 	}
 
 	@Override
