@@ -2,9 +2,13 @@ package com.dostf.apostar.services.impl;
 
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
+import com.dostf.apostar.dtos.RechargeDtoResponse;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -34,17 +38,18 @@ public class RechargeServiceImp implements IRechargeService {
 	}
 
 	@Override
-	public Object recharge(RechargeDto rechargeData) throws MandatoryFieldsMissingException {
+	public ResponseEntity<Object> recharge(RechargeDto rechargeData) throws MandatoryFieldsMissingException {
 		rechargeData.setDistribuidor(distribuidor);
 		rechargeData.validateDataMandatory();
+		HttpEntity<RechargeDto> request = new HttpEntity<>(rechargeData);
 		try {
-			return restTemplate.exchange(uri, HttpMethod.POST, addHeaders, Object.class);
+			ResponseEntity<Object> response = restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
+			return response;
 		} catch (Exception e) {
 			String mensaje = RequestEnum.SERVICE_NOT_AVAILABLE.getMessage().replace("{URL}", uri);
 			((HttpClientErrorException) e).getResponseBodyAsString().contains("The request sent by the client was syntactically incorrect ()");
 			throw new ServiceNotAvailableException(mensaje);
 		}
-
 	}
 
 }

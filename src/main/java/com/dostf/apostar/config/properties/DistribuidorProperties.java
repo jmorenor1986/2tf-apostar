@@ -6,6 +6,8 @@ import com.dostf.apostar.common.enums.RequestEnum;
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,17 +20,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Setter
 @Component
 @ConfigurationProperties(prefix = "distribuidor")
-@XmlRootElement
 public class DistribuidorProperties {
   private String identificador;
-  @JsonProperty("usuario-id")
-  @XmlElement(name = "usuario-id")
+  @JacksonXmlProperty(localName = "usuario-id")
   private Long usuarioId;
-  @XmlElement(name = "cliente-id")
-  @JsonProperty("cliente-id")
+ @JacksonXmlProperty(localName ="cliente-id")
   private String clienteId;
-  @JsonProperty("equipo-cliente-id")
-  @XmlElement(name = "equipo-cliente-id")
+ @JacksonXmlProperty(localName ="equipo-cliente-id")
   private String equipoClienteId;
   private String llave;
   private String clave;
