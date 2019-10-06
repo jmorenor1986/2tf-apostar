@@ -6,10 +6,13 @@ import java.util.UUID;
 import com.dostf.apostar.common.enums.RechargeEnum;
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 
+import com.dostf.apostar.common.exceptions.SecureDistribuidorException;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Setter
 @JacksonXmlRootElement(localName = "recarga-input")
 public class RechargeDto {
+    @ApiModelProperty(hidden = true)
     private DistribuidorProperties distribuidor;
     private String numero;
     @JacksonXmlProperty(localName = "codigo-subproducto")
@@ -46,6 +50,12 @@ public class RechargeDto {
         }
         if (Objects.isNull(transaccionDistribuidorId)) {
             transaccionDistribuidorId = UUID.randomUUID().getLeastSignificantBits();
+        }
+    }
+
+    public void validateExistDistribuidor() throws SecureDistribuidorException {
+        if (Objects.nonNull(distribuidor)) {
+            throw new SecureDistribuidorException("Campos enviados inválidos");
         }
     }
 }
