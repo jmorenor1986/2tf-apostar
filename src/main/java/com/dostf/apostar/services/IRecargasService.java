@@ -1,10 +1,9 @@
 package com.dostf.apostar.services;
 
 import com.dostf.apostar.common.exceptions.ServiceNotAvailableException;
-import com.dostf.apostar.dtos.RechargeDto;
-import org.springframework.http.ResponseEntity;
+import com.dostf.apostar.dtos.RecargarDto;
 
-public interface IRechargeService {
+public interface IRecargasService {
 
     /**
      * method to recharge a celphone
@@ -13,5 +12,7 @@ public interface IRechargeService {
      * @return
      * @throws ServiceNotAvailableException
      */
-    Object recharge(RechargeDto rechargeData) throws ServiceNotAvailableException;
+    Object recargar(RecargarDto rechargeData) throws ServiceNotAvailableException;
+
+    Object consultarSubproducto(Long id);
 }
