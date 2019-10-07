@@ -9,6 +9,9 @@ operaciones:
       urlBase: /betplay
       urlBetPlay: /asdasd
       urlDos: /ased
+    recaudos:
+      urlBase: /recaudo
+      urlConsultarDepartamentos: /consultar-departamentos
 distribuidor:
   identificador: 8000015206
   usuario-id: 8000015206

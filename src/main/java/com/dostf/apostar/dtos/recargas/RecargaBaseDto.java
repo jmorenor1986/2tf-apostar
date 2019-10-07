@@ -1,4 +1,4 @@
-package com.dostf.apostar.dtos;
+package com.dostf.apostar.dtos.recargas;
 
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

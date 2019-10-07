@@ -3,15 +3,14 @@ package com.dostf.apostar.services.impl;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecargasProperties;
-import com.dostf.apostar.dtos.ConsultarSubproductoDto;
-import com.dostf.apostar.dtos.RecargaBaseDto;
+import com.dostf.apostar.dtos.recargas.RecargaBaseDto;
 import com.dostf.apostar.services.client.IRestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
-import com.dostf.apostar.dtos.RecargarDto;
+import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
 import org.springframework.web.server.ResponseStatusException;
 
