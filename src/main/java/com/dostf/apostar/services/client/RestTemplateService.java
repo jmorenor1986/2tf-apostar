@@ -1,6 +1,9 @@
 package com.dostf.apostar.services.client;
 
 import com.dostf.apostar.common.interceptors.HttpRequestInterceptor;
+import com.dostf.apostar.services.IRestTemplateService;
+import com.dostf.apostar.services.IXmlApostarMapper;
+import com.dostf.apostar.services.mapper.XmlApostarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
@@ -14,18 +17,22 @@ import java.util.Optional;
 @Service
 public class RestTemplateService implements IRestTemplateService {
 
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final IXmlApostarMapper xmlMapper;
     @Autowired
-    public RestTemplateService(RestTemplateBuilder restTemplateBuilder) {
+    public RestTemplateService(RestTemplateBuilder restTemplateBuilder,
+                               final XmlApostarMapper xmlMapper) {
         restTemplate = restTemplateBuilder
             .additionalInterceptors(Collections.singletonList(new HttpRequestInterceptor()))
             .build();
+        this.xmlMapper = xmlMapper;
     }
 
     @Override
-    public Optional<Object> post(String uri, Object request) {
+    public Optional<String> post(String uri, Object request) {
         HttpEntity<Object> requestXMl = new HttpEntity<>(request, addHeaders());
-        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.POST, requestXMl, Object.class).getBody());
+        String xml = restTemplate.exchange(uri, HttpMethod.POST, requestXMl, String.class).getBody();
+        return xmlMapper.toJsonString(xml);
     }
 
     private HttpHeaders addHeaders() {

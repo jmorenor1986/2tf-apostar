@@ -12,7 +12,7 @@ public interface IRecargasService {
      * @return
      * @throws ServiceNotAvailableException
      */
-    Object recargar(RecargarDto rechargeData) throws ServiceNotAvailableException;
+    String recargar(RecargarDto rechargeData) throws ServiceNotAvailableException;
 
-    Object consultarSubproducto(Long id);
+    String consultarSubproducto(Long id);
 }

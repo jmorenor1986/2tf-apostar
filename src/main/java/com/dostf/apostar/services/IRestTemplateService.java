@@ -1,4 +1,4 @@
-package com.dostf.apostar.services.client;
+package com.dostf.apostar.services;
 
 import java.util.Optional;
 
@@ -9,5 +9,6 @@ public interface IRestTemplateService {
      * @param request
      * @return
      */
-    public Optional<Object> post(String uri, Object request);
+    Optional<String> post(String uri, Object request);
+
 }

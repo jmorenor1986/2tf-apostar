@@ -12,6 +12,7 @@ operaciones:
     recaudos:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
     sorteos:
       urlBase: /resultado-sorteos
       urlConsultarResultados: /consultar-resultado-sorteos
