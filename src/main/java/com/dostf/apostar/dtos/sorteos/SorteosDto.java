@@ -2,20 +2,20 @@ package com.dostf.apostar.dtos.sorteos;
 
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.common.exceptions.SecureDistribuidorException;
-import com.dostf.apostar.config.properties.DistribuidorProperties;
-import com.dostf.apostar.dtos.recargas.RecargaBaseDto;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-@Getter
 @Setter
 public class SorteosDto extends SorteosBaseDto {
     @JacksonXmlProperty(localName = "fecha-sorteo")
-    private Date fechaSorteo;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate fechaSorteo;
     private Long codigo;
     public void validateExistDistribuidor() {
         if(Objects.nonNull(distribuidor)){
@@ -28,5 +28,13 @@ public class SorteosDto extends SorteosBaseDto {
         if(Objects.isNull(fechaSorteo))
             throw new MandatoryFieldsMissingException("Fecha sorteo es obligatoria");
 
+    }
+    
+    public LocalDate getFechaSorteo() {
+        return LocalDate.parse(fechaSorteo.toString(),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    
+    public Long getCodigo() {
+        return codigo;
     }
 }

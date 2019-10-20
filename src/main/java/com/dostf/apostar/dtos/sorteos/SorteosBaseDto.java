@@ -13,15 +13,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@JacksonXmlRootElement(localName = "consulta-resultado-sorteos-input")
 public class SorteosBaseDto {
 
     @ApiModelProperty(hidden = true)
     protected DistribuidorProperties distribuidor;
-    @JacksonXmlProperty(localName = "codigo-subproducto")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    protected String codigoSubproducto;
-    @JacksonXmlProperty(localName = "transaccion-distribuidor-id")
-    protected Long transaccionDistribuidorId;
-
 }

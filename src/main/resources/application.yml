@@ -12,6 +12,10 @@ operaciones:
     recaudos:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados: /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal: /consultar-resultado-sorteos-semanal
 distribuidor:
   identificador: 8000015206
   usuario-id: 8000015206
