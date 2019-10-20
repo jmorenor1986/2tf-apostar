@@ -1,0 +1,3 @@
+
+¿%squid:RedundantThrowsDeclarationCheck"éRemove the declaration of thrown exception 'com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException' which is a runtime exception.(†Åõ⁄
+º%squid:RedundantThrowsDeclarationCheck*"äRemove the declaration of thrown exception 'com.dostf.apostar.common.exceptions.SecureDistribuidorException' which is a runtime exception.(⁄éÄ†

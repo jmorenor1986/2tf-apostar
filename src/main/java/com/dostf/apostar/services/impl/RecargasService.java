@@ -4,15 +4,17 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecargasProperties;
 import com.dostf.apostar.dtos.recargas.RecargaBaseDto;
-import com.dostf.apostar.services.client.IRestTemplateService;
+import com.dostf.apostar.services.IRestTemplateService;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
-import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
 import org.springframework.web.server.ResponseStatusException;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class RecargasService implements IRecargasService {
@@ -24,7 +26,7 @@ public class RecargasService implements IRecargasService {
   private final String uri;
 
   @Autowired
-  public RecargasService(OperacionesProperties properties, IRestTemplateService restTemplateService,
+  public RecargasService(IRestTemplateService restTemplateService, OperacionesProperties properties,
                          DistribuidorProperties distribuidor) {
     this.recargasProperties = properties.getRecargas();
     this.uri = properties.getUrlBase() + recargasProperties.getUrlBase();
@@ -33,22 +35,25 @@ public class RecargasService implements IRecargasService {
   }
 
   @Override
-  public Object recargar(RecargarDto rechargeData) throws MandatoryFieldsMissingException {
-    final String uri = this.uri + recargasProperties.getUrlRecargar();
-    rechargeData.validateExistDistribuidor();
-    rechargeData.setDistribuidor(distribuidor);
-    rechargeData.validateDataMandatory();
-    return restTemplateService.post(uri, rechargeData).orElseThrow(()
+  public String recargar(RecargarDto dto) {
+    if(isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    final String requestUri = this.uri + recargasProperties.getUrlRecargar();
+    dto.setDistribuidor(distribuidor);
+    dto.validateMandatoryFields();
+    String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
         -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    return XML.toJSONObject(result).toString();
   }
 
   @Override
-  public Object consultarSubproducto(Long id) {
-    final String uri = this.uri + recargasProperties.getUrlConsultarSubproducto();
-    RecargaBaseDto consultarSubproducto = new RecargaBaseDto();
-    consultarSubproducto.setDistribuidor(distribuidor);
-    consultarSubproducto.setTransaccionDistribuidorId(id);
-    return restTemplateService.post(uri, consultarSubproducto).orElseThrow(()
+  public String consultarSubproducto(Long id) {
+    final String requestUri = this.uri + recargasProperties.getUrlConsultarSubproducto();
+    RecargaBaseDto dto = new RecargaBaseDto();
+    dto.setDistribuidor(distribuidor);
+    dto.setTransaccionDistribuidorId(id);
+    dto.validateMandatoryFields();
+    String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
         -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    return XML.toJSONObject(result).toString();
   }
 }

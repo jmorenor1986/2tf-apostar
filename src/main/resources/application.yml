@@ -12,12 +12,13 @@ operaciones:
     recaudos:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
 distribuidor:
   identificador: 8000015206
   usuario-id: 8000015206
   cliente-id: 8000015207
   equipo-cliente-id: 1406
-  llave: KEY
+  llave: MIIBUDCB6AYHKoZIzjgEATCB3AJhAOnmQlmdNV83yX/9NWcSC44lyc1D6SezqWcPvsXYkBQZItLDs60kgAk3mYadHoRqq0n6sK0m0s5qIiGdRwvOfXd9SiH76cJwtX9gcALzzvg5NpTPRe42iMEajFarEno9rwIVAJzb2EyfGsLzjQ+A9Cq5Uuczi/URAmAwRwrVoAX7FM4tnc2H44vH0bHF+suuy+lfGQqnox0jxNu8vgYXRURAGlssAgll2MK9IXHTZoRFdx90ughNICnYPBwVhUfzqfGicVviPVGuTT5aH2pwZPMWkzo0bT9SklIDYwACYGdu5NEfPk5nc0/I4K/eKEPpc9MGcbpqvx6wxEyP6jFeKVozRMa8sauLNt9aoYe7Oim1xStdVUov3ShzYINuheofVf4wcp1erR9Ws+MBrikxMc5vhk9mqoD+w3wn2rxyBQ==
   clave: Qwerty1
 
 server:
