@@ -7,8 +7,8 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.SorteosProperties;
 import com.dostf.apostar.dtos.sorteos.SorteosDto;
+import com.dostf.apostar.services.IRestTemplateService;
 import com.dostf.apostar.services.ISorteosService;
-import com.dostf.apostar.services.client.IRestTemplateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -25,9 +25,10 @@ public class SorteosServiceTest {
     private static final String URL_RESULTADO_SORTEOS = "/resultado-sorteos";
     private static final String URL_CONSULTAR_RESULTADO_SORTEOS = "/consultar-resultado-sorteos";
     private static final String URL_BASE = "http://172.17.254.17/web-services/api";
+    private static final String EXPECTED_RESULT = "RESULT0";
     private ISorteosService sorteoService;
     @Mock
-    private  IRestTemplateService restTemplateService;
+    private IRestTemplateService restTemplateService;
     @Mock
     private DistribuidorProperties distribuidorProperties;
     @Mock
@@ -50,7 +51,7 @@ public class SorteosServiceTest {
     public void givenAValidDtoWhenConsultarResultadosThenReturnObjectSucess(){
         final String uri = URL_BASE.concat(URL_RESULTADO_SORTEOS).concat(URL_CONSULTAR_RESULTADO_SORTEOS);
         SorteosDto sorteosDto= Mockito.mock(SorteosDto.class);
-        Mockito.when(restTemplateService.post(eq(uri), any(SorteosDto.class))).thenReturn(Optional.of(new Object()));
+        Mockito.when(restTemplateService.post(eq(uri), any(SorteosDto.class))).thenReturn(Optional.of(EXPECTED_RESULT));
         Object result = this.sorteoService.consultarResultados(sorteosDto);
         assertNotNull(result);
     }
