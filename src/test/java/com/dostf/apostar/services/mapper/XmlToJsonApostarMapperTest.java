@@ -5,9 +5,8 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class XmlToJsonApostarMapperTest {
     private final String EXPECTED_RESULT = "{\"recaudo-output\":{\"listado-departamentos\":{\"departamento\":[{\"codigo\":63,\"nombre\":\"Quindío\"},{\"codigo\":17,\"nombre\":\"Caldas\"},{\"codigo\":66,\"nombre\":\"Risaralda\"}]}}}".trim();

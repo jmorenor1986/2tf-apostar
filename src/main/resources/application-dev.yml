@@ -13,13 +13,17 @@ operaciones:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
       urlConsultarRecaudos: /consultar-recaudos
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados : /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal : /consultar-resultado-sorteos-semanal
 distribuidor:
-  identificador: 8006874985
-  usuario-id: 8006521257
-  cliente-id: 3123215698
-  equipo-cliente-id: 355269054586598
-  llave: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+Ly+F+liE/7NIMHaZ++vL1lVZjdXtoQYg22fmN/BdHEMUPRidoFSH/Ij8alf0UgYmwdosV3DFAKxnciDAMT9GbjrxxqUJVuRAczAIVF7Xau2ovc28FwF7DfcwLiftyvauMLzc/sxYPIkULYHsYF7jjkhkLJDR3/sbRNoSzsxinQIDAQAB
-  clave: 123456
+  identificador: 8000015206
+  usuario-id: 8000015206
+  cliente-id: 8000015207
+  equipo-cliente-id: 1406
+  llave: MIIBUDCB6AYHKoZIzjgEATCB3AJhAOnmQlmdNV83yX/9NWcSC44lyc1D6SezqWcPvsXYkBQZItLDs60kgAk3mYadHoRqq0n6sK0m0s5qIiGdRwvOfXd9SiH76cJwtX9gcALzzvg5NpTPRe42iMEajFarEno9rwIVAJzb2EyfGsLzjQ+A9Cq5Uuczi/URAmAwRwrVoAX7FM4tnc2H44vH0bHF+suuy+lfGQqnox0jxNu8vgYXRURAGlssAgll2MK9IXHTZoRFdx90ughNICnYPBwVhUfzqfGicVviPVGuTT5aH2pwZPMWkzo0bT9SklIDYwACYGdu5NEfPk5nc0/I4K/eKEPpc9MGcbpqvx6wxEyP6jFeKVozRMa8sauLNt9aoYe7Oim1xStdVUov3ShzYINuheofVf4wcp1erR9Ws+MBrikxMc5vhk9mqoD+w3wn2rxyBQ==
+  clave: Qwerty1
 
 server:
   servlet:

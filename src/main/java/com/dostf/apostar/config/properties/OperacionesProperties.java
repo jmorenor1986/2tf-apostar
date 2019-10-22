@@ -12,5 +12,6 @@ import org.springframework.stereotype.Component;
 public class OperacionesProperties {
   private String urlBase;
   private RecargasProperties recargas;
+  private SorteosProperties sorteos;
   private RecaudosProperties recaudos;
 }
