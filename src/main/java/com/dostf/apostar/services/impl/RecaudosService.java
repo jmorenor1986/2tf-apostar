@@ -7,7 +7,6 @@ import com.dostf.apostar.dtos.recaudos.ConsultarDepartamentoDto;
 import com.dostf.apostar.dtos.recaudos.RecaudoDto;
 import com.dostf.apostar.services.IRecaudosService;
 import com.dostf.apostar.services.client.RestTemplateService;
-import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -41,10 +40,8 @@ public class RecaudosService implements IRecaudosService {
         dto.setDistribuidor(distribuidor);
         dto.setTransaccionDistribuidorId(transaccionId);
         dto.validateMandatoryFields();
-        String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
+        return  restTemplateService.post(requestUri, dto).orElseThrow(()
             -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
-        return XML.toJSONObject(result).toString();
-
     }
 
     @Override
@@ -53,8 +50,7 @@ public class RecaudosService implements IRecaudosService {
         final String requestUri = this.uri.concat(recaudosProperties.getUrlConsultarRecaudos());
         dto.setDistribuidor(distribuidor);
         dto.validateMandatoryFields();
-        String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
             -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
-        return XML.toJSONObject(result).toString();
     }
 }

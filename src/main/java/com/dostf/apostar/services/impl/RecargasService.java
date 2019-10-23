@@ -4,14 +4,12 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecargasProperties;
 import com.dostf.apostar.dtos.recargas.RecargaBaseDto;
-import com.dostf.apostar.services.IRestTemplateService;
-import org.json.XML;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.stereotype.Service;
-
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
+import com.dostf.apostar.services.IRestTemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import static java.util.Objects.isNull;
@@ -40,9 +38,8 @@ public class RecargasService implements IRecargasService {
     final String requestUri = this.uri + recargasProperties.getUrlRecargar();
     dto.setDistribuidor(distribuidor);
     dto.validateMandatoryFields();
-    String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
+    return  restTemplateService.post(requestUri, dto).orElseThrow(()
         -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
-    return XML.toJSONObject(result).toString();
   }
 
   @Override
@@ -52,8 +49,7 @@ public class RecargasService implements IRecargasService {
     dto.setDistribuidor(distribuidor);
     dto.setTransaccionDistribuidorId(id);
     dto.validateMandatoryFields();
-    String result =  restTemplateService.post(requestUri, dto).orElseThrow(()
+    return  restTemplateService.post(requestUri, dto).orElseThrow(()
         -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
-    return XML.toJSONObject(result).toString();
   }
 }

@@ -5,6 +5,7 @@ import com.dostf.apostar.dtos.sorteos.SorteosDto;
 import com.dostf.apostar.services.ISorteosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,8 @@ public class SorteosController {
   @Autowired
   private ISorteosService sorteosService;
   
-  @GetMapping("/consultar")
-  public Object consultarSorteos(@RequestBody SorteosDto sorteosDto) throws ServiceNotAvailableException {
+  @PostMapping("/consultar")
+  public String consultarSorteos(@RequestBody SorteosDto sorteosDto) throws ServiceNotAvailableException {
     return  sorteosService.consultarResultados(sorteosDto);
   }
 }
