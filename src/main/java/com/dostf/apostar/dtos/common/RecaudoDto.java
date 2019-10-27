@@ -2,19 +2,19 @@ package com.dostf.apostar.dtos.common;
 
 import com.dostf.apostar.common.enums.ErrorEnum;
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.StringUtils;
 
 @Getter
 @Setter
-public class GenericDto {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    protected String nombre;
+@JacksonXmlRootElement(localName = "recaudo")
+public class RecaudoDto {
     protected String codigo;
+    protected String referencia;
 
     public void validateMandatoryFields() {
-        if(StringUtils.isEmpty(codigo)) throw new MandatoryFieldsMissingException(ErrorEnum.CODIGO_IS_MANDATORY.getMessage());
+        if(StringUtils.isEmpty(referencia)) throw new MandatoryFieldsMissingException(ErrorEnum.IVA_IS_MANDATORY.getMessage());
     }
 }

@@ -2,12 +2,12 @@ package com.dostf.apostar.controllers;
 
 import com.dostf.apostar.dtos.sorteos.SorteosDto;
 import com.dostf.apostar.services.ISorteosService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import static org.junit.Assert.assertNotNull;
 
 public class SorteosControllerTest {

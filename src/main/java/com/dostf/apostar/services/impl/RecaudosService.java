@@ -4,7 +4,9 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecaudosProperties;
 import com.dostf.apostar.dtos.recaudos.ConsultarDepartamentoDto;
-import com.dostf.apostar.dtos.recaudos.RecaudoDto;
+import com.dostf.apostar.dtos.recaudos.ConsultarRecaudoDto;
+import com.dostf.apostar.dtos.recaudos.ConsultarValorDto;
+import com.dostf.apostar.dtos.recaudos.GuardarDto;
 import com.dostf.apostar.services.IRecaudosService;
 import com.dostf.apostar.services.client.RestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,9 @@ import static java.util.Objects.isNull;
 @Service
 @Validated
 public class RecaudosService implements IRecaudosService {
-    RestTemplateService restTemplateService;
-    DistribuidorProperties distribuidor;
-    RecaudosProperties recaudosProperties;
+    private final RestTemplateService restTemplateService;
+    private final DistribuidorProperties distribuidor;
+    private final RecaudosProperties recaudosProperties;
     private final String uri;
 
     @Autowired
@@ -40,14 +42,43 @@ public class RecaudosService implements IRecaudosService {
         dto.setDistribuidor(distribuidor);
         dto.setTransaccionDistribuidorId(transaccionId);
         dto.validateMandatoryFields();
-        return  restTemplateService.post(requestUri, dto).orElseThrow(()
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
             -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
     }
 
     @Override
-    public String consultarRecaudos(RecaudoDto dto) {
+    public String consultarRecaudos(final ConsultarRecaudoDto dto) {
         if (isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         final String requestUri = this.uri.concat(recaudosProperties.getUrlConsultarRecaudos());
+        dto.setDistribuidor(distribuidor);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String consultarValor(final ConsultarValorDto dto) {
+        if (isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        final String requestUri = this.uri.concat(recaudosProperties.getUrlConsultarValor());
+        dto.setDistribuidor(distribuidor);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String guardar(final GuardarDto dto) {
+        if (isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        final String requestUri = this.uri.concat(recaudosProperties.getUrlGuardar());
+        dto.setDistribuidor(distribuidor);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    public String consultar(final ConsultarRecaudoDto dto) {
+        if (isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        final String requestUri = this.uri.concat(recaudosProperties.getUrlConsultar());
         dto.setDistribuidor(distribuidor);
         dto.validateMandatoryFields();
         return restTemplateService.post(requestUri, dto).orElseThrow(()

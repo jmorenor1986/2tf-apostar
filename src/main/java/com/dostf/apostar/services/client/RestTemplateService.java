@@ -19,6 +19,7 @@ public class RestTemplateService implements IRestTemplateService {
 
     private final RestTemplate restTemplate;
     private final IXmlApostarMapper xmlMapper;
+
     @Autowired
     public RestTemplateService(RestTemplateBuilder restTemplateBuilder,
                                final XmlApostarMapper xmlMapper) {
