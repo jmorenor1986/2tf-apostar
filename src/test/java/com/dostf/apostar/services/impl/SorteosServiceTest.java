@@ -65,18 +65,13 @@ public class SorteosServiceTest {
         SorteosDto sorteosDto = null;
         this.sorteoService.consultarResultados(sorteosDto);
     }
-
-    @Test(expected = SecureDistribuidorException.class)
-    public void givenADtoWithDistribuidorWhenConsultaResultadosThenReturnMandatoryFieldException(){
-        SorteosDto sorteosDto = new SorteosDto();
-        sorteosDto.setDistribuidor(new DistribuidorProperties());
-        this.sorteoService.consultarResultados(sorteosDto);
-
-    }
+    
 
     @Test(expected = MandatoryFieldsMissingException.class)
     public void givenADtoWithOutFechaSorteoWhenConsultaResultadosThenMandatoryFieldException(){ ;
         SorteosDto sorteosDto = new SorteosDto();
+        DistribuidorProperties distribuidorProperties = Mockito.mock(DistribuidorProperties.class);
+        sorteosDto.setDistribuidor(distribuidorProperties);
         sorteosDto.setFechaSorteo(null);
         this.sorteoService.consultarResultados(sorteosDto);
     }
@@ -98,7 +93,7 @@ public class SorteosServiceTest {
         String result = sorteoService.consultarResultadosSemanal(sorteosDto);
     }
     
-    @Test(expected = SecureDistribuidorException.class)
+    @Test(expected = MandatoryFieldsMissingException.class)
     public void givenAIncorrectDistribuidorWhenInvokeConsultaResultadosSemanalThenMandatoryFieldExeption(){
         final String uri = URL_BASE.concat(URL_RESULTADO_SORTEOS).concat(URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL);
         SorteosDto sorteosDto = new SorteosDto();
