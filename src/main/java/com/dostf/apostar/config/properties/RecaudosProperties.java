@@ -11,4 +11,7 @@ public class RecaudosProperties {
     private String urlBase;
     private String urlConsultarDepartamentos;
     private String urlConsultarRecaudos;
+    private String urlConsultarValor;
+    private String urlGuardar;
+    private String urlConsultar;
 }

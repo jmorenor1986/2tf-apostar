@@ -1,0 +1,34 @@
+operaciones:
+  api:
+    urlBase: http://172.17.254.17/web-services-seta-apostar/api
+    recargas:
+      urlBase: /recarga
+      urlRecargar: /recargar
+      urlConsultarSubproducto: /consultar-subproductos
+    betplay:
+      urlBase: /betplay
+      urlBetPlay: /asdasd
+      urlDos: /ased
+    recaudos:
+      urlBase: /recaudo
+      urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
+      urlConsultarValor: /consultar-valor
+      urlGuardar: /guardar
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados : /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal : /consultar-resultado-sorteos-semanal
+distribuidor:
+  identificador: 8006874985
+  usuario-id: 8006521257
+  cliente-id: 3123215698
+  equipo-cliente-id: 355269054586598
+  llave: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+Ly+F+liE/7NIMHaZ++vL1lVZjdXtoQYg22fmN/BdHEMUPRidoFSH/Ij8alf0UgYmwdosV3DFAKxnciDAMT9GbjrxxqUJVuRAczAIVF7Xau2ovc28FwF7DfcwLiftyvauMLzc/sxYPIkULYHsYF7jjkhkLJDR3/sbRNoSzsxinQIDAQAB
+  clave: 123456
+
+server:
+  servlet:
+    context-path: /dostf-apostar
+  port: 5000
+
