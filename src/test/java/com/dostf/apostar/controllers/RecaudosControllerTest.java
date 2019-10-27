@@ -58,7 +58,7 @@ public class RecaudosControllerTest {
 
     @Test
     public void testConsultarSuccess() {
-        when(recaudosService.consultarRecaudos(any())).thenReturn(EXPECTED_RESULT);
+        when(recaudosService.consultar(any())).thenReturn(EXPECTED_RESULT);
         String result = recaudosController.consultar(new ConsultarRecaudoDto());
         assertNotNull(result);
     }
