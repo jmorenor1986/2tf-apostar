@@ -24,27 +24,27 @@ public class RecaudosController {
     }
 
     @PostMapping(value = "consultar-recaudos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object consultarRecaudos(@RequestBody ConsultarRecaudoDto dto) {
+    public String consultarRecaudos(@RequestBody ConsultarRecaudoDto dto) {
         return recaudosService.consultarRecaudos(dto);
     }
 
     @PostMapping(value = "consultar-departamentos/{transaccion-distribuidor-id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object consultarDepartamentos(@PathVariable("transaccion-distribuidor-id") Long id) {
+    public String consultarDepartamentos(@PathVariable("transaccion-distribuidor-id") Long id) {
         return recaudosService.consultarDepartamentos(id);
     }
 
     @PostMapping(value = "consultar-valor", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object consultarValor(@RequestBody ConsultarValorDto dto) {
+    public String consultarValor(@RequestBody ConsultarValorDto dto) {
         return recaudosService.consultarValor(dto);
     }
 
     @PostMapping(value = "guardar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object guardar(@RequestBody GuardarDto guardarDto) {
+    public String guardar(@RequestBody GuardarDto guardarDto) {
         return recaudosService.guardar(guardarDto);
     }
 
     @PostMapping(value = "consultar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object consultar(@RequestBody ConsultarRecaudoDto dto) {
+    public String consultar(@RequestBody ConsultarRecaudoDto dto) {
         return recaudosService.consultar(dto);
     }
 }

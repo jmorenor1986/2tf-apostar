@@ -4,5 +4,5 @@ public interface IValidateFields {
   /**
    * method for validate fields mandatory
    */
-  public void validateMandatoryFields();
+  void validateMandatoryFields();
 }

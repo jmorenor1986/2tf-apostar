@@ -42,7 +42,7 @@ public class RecaudosService implements IRecaudosService {
         dto.setDistribuidor(distribuidor);
         dto.setTransaccionDistribuidorId(transaccionId);
         dto.validateMandatoryFields();
-        return  restTemplateService.post(requestUri, dto).orElseThrow(()
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
             -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
     }
 

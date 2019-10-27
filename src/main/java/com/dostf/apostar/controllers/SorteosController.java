@@ -4,7 +4,6 @@ import com.dostf.apostar.common.exceptions.ServiceNotAvailableException;
 import com.dostf.apostar.dtos.sorteos.SorteosDto;
 import com.dostf.apostar.services.ISorteosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

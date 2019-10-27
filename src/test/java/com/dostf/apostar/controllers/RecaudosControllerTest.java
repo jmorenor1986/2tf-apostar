@@ -38,28 +38,28 @@ public class RecaudosControllerTest {
     @Test
     public void testConsultarRecaudosSuccess() {
         when(recaudosService.consultarRecaudos(any())).thenReturn(EXPECTED_RESULT);
-        Object result = recaudosController.consultarRecaudos(new ConsultarRecaudoDto());
+        String result = recaudosController.consultarRecaudos(new ConsultarRecaudoDto());
         assertNotNull(result);
     }
 
     @Test
     public void testConsultarValorSuccess() {
         when(recaudosService.consultarValor(any())).thenReturn(EXPECTED_RESULT);
-        Object result = recaudosController.consultarValor(new ConsultarValorDto());
+        String result = recaudosController.consultarValor(new ConsultarValorDto());
         assertNotNull(result);
     }
 
     @Test
     public void testGuardarSuccess() {
         when(recaudosService.guardar(any())).thenReturn(EXPECTED_RESULT);
-        Object result = recaudosController.guardar(new GuardarDto());
+        String result = recaudosController.guardar(new GuardarDto());
         assertNotNull(result);
     }
 
     @Test
     public void testConsultarSuccess() {
         when(recaudosService.consultarRecaudos(any())).thenReturn(EXPECTED_RESULT);
-        Object result = recaudosController.consultar(new ConsultarRecaudoDto());
+        String result = recaudosController.consultar(new ConsultarRecaudoDto());
         assertNotNull(result);
     }
 }

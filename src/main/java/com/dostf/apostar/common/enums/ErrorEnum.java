@@ -8,15 +8,13 @@ public enum ErrorEnum {
 	DISTRIBUIDOR_IS_MANDATORY("Datos inválidos del distribuidor"),
 	TRANSACCION_DISTRIBUIDOR_ID_IS_MANDATORY("Transaccion Distribuidor Id es obligatorio"),
 	CODIGO_IS_MANDATORY("Codigo es obligatorio"),
-    DEPARTAMENTO_IS_MANDATORY("Codigo de Departamento es obligatorio"),
-	NOMBRE_IS_MANDATORY("Nombre es obligatorio"),
 	IVA_IS_MANDATORY("Iva es obligatorio"),
 	XML_PARSING("Parsing xml to json"),
 	DATE_SORTEO_IS_MANDATORY("La fecha de sorteo es obligatoria"),
 	CODIGO_LOTERIA_IS_MANDATORY ("El código de la loteria es obligatorio");
 	private final String message;
 
-	private ErrorEnum(String message) {
+	ErrorEnum(String message) {
 		this.message = message;
 	}
 
