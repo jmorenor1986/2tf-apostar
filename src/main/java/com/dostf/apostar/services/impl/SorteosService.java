@@ -36,10 +36,20 @@ public class SorteosService implements ISorteosService {
         String uri = this.uri.concat(sorteosProperties.getUrlConsultarResultados());
         if (Objects.isNull(sorteosDto))
             throw new MandatoryDtoMissingException(RequestEnum.ALL_DATA_IS_NULL.getMessage());
-        sorteosDto.validateExistDistribuidor();
-        sorteosDto.validateDataMandatory();
         sorteosDto.setDistribuidor(this.distribuidorProperties);
+        sorteosDto.validateMandatoryFields();
         return restTemplateService.post(uri, sorteosDto)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, ResponseEnum.NOT_FOUND_SERVICE.getMessage()));
+    }
+    
+    @Override
+    public String consultarResultadosSemanal(SorteosDto sorteosDto) {
+        String uri = this.uri.concat((sorteosProperties.getUrlConsultarResultadosSemanal()));
+        if(Objects.isNull(sorteosDto))
+            throw new MandatoryDtoMissingException(RequestEnum.ALL_DATA_IS_NULL.getMessage());
+        sorteosDto.setDistribuidor(this.distribuidorProperties);
+        sorteosDto.validateMandatoryFields();
+        return restTemplateService.post(uri,sorteosDto)
+          .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,ResponseEnum.NOT_FOUND_SERVICE.getMessage()));
     }
 }

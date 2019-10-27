@@ -14,11 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/sorteos")
 public class SorteosController {
   
-  @Autowired
   private ISorteosService sorteosService;
+  
+  @Autowired
+  public SorteosController(ISorteosService sorteosService) {
+    this.sorteosService = sorteosService;
+  }
   
   @PostMapping("/consultar")
   public String consultarSorteos(@RequestBody SorteosDto sorteosDto) throws ServiceNotAvailableException {
     return  sorteosService.consultarResultados(sorteosDto);
+  }
+  
+  @PostMapping("/consultarSorteosSemanal")
+  public String consultarSorteosSemanal(@RequestBody  SorteosDto sorteosDto) throws ServiceNotAvailableException {
+    return sorteosService.consultarResultadosSemanal(sorteosDto);
   }
 }

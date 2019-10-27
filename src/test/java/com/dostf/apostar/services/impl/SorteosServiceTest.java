@@ -26,6 +26,8 @@ public class SorteosServiceTest {
     private static final String URL_CONSULTAR_RESULTADO_SORTEOS = "/consultar-resultado-sorteos";
     private static final String URL_BASE = "http://172.17.254.17/web-services/api";
     private static final String EXPECTED_RESULT = "RESULT0";
+    public static final String URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL = "consultar-resultado-sorteos-semanal";
+    public static final long CODIGO = 1;
     private ISorteosService sorteoService;
     @Mock
     private IRestTemplateService restTemplateService;
@@ -43,6 +45,7 @@ public class SorteosServiceTest {
         Mockito.when(operacionesProperties.getUrlBase()).thenReturn(URL_BASE);
         Mockito.when(operacionesProperties.getSorteos()).thenReturn(sorteosProperties);
         Mockito.when(sorteosProperties.getUrlBase()).thenReturn(URL_RESULTADO_SORTEOS);
+        Mockito.when(sorteosProperties.getUrlConsultarResultadosSemanal()).thenReturn(URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL);
         Mockito.when(sorteosProperties.getUrlConsultarResultados()).thenReturn(URL_CONSULTAR_RESULTADO_SORTEOS);
         this.sorteoService = new SorteosService(restTemplateService,distribuidorProperties,operacionesProperties);
     }
@@ -62,20 +65,43 @@ public class SorteosServiceTest {
         SorteosDto sorteosDto = null;
         this.sorteoService.consultarResultados(sorteosDto);
     }
-
-    @Test(expected = SecureDistribuidorException.class)
-    public void givenADtoWithDistribuidorWhenConsultaResultadosThenReturnMandatoryFieldException(){
-        SorteosDto sorteosDto = new SorteosDto();
-        sorteosDto.setDistribuidor(new DistribuidorProperties());
-        this.sorteoService.consultarResultados(sorteosDto);
-
-    }
+    
 
     @Test(expected = MandatoryFieldsMissingException.class)
     public void givenADtoWithOutFechaSorteoWhenConsultaResultadosThenMandatoryFieldException(){ ;
         SorteosDto sorteosDto = new SorteosDto();
+        DistribuidorProperties distribuidorProperties = Mockito.mock(DistribuidorProperties.class);
+        sorteosDto.setDistribuidor(distribuidorProperties);
         sorteosDto.setFechaSorteo(null);
         this.sorteoService.consultarResultados(sorteosDto);
+    }
+    
+    @Test
+    public void givenAValidDtoWhenInvokeConsultaResultadosSemanalThenObjectSuccess(){
+        final String uri = URL_BASE.concat(URL_RESULTADO_SORTEOS).concat(URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL);
+        SorteosDto sorteosDto = Mockito.mock(SorteosDto.class);
+        Mockito.when(restTemplateService.post(eq(uri), any(SorteosDto.class))).thenReturn(Optional.of(EXPECTED_RESULT));
+        String result = sorteoService.consultarResultadosSemanal(sorteosDto);
+        assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryDtoMissingException.class)
+    public void givenANullDtoWhenInvokeConsultaResultadosSemanalThenMandatoryDtoException(){
+        final String uri = URL_BASE.concat(URL_RESULTADO_SORTEOS).concat(URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL);
+        SorteosDto sorteosDto = null;
+        Mockito.when(restTemplateService.post(eq(uri), any(SorteosDto.class))).thenReturn(Optional.of(EXPECTED_RESULT));
+        String result = sorteoService.consultarResultadosSemanal(sorteosDto);
+    }
+    
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void givenAIncorrectDistribuidorWhenInvokeConsultaResultadosSemanalThenMandatoryFieldExeption(){
+        final String uri = URL_BASE.concat(URL_RESULTADO_SORTEOS).concat(URL_CONSULTAR_RESULTADO_SORTEOS_SEMANAL);
+        SorteosDto sorteosDto = new SorteosDto();
+        sorteosDto.setDistribuidor(Mockito.mock(DistribuidorProperties.class));
+        sorteosDto.setCodigo(CODIGO);
+        sorteosDto.setFechaSorteo(null);
+        Mockito.when(restTemplateService.post(eq(uri), any(SorteosDto.class))).thenReturn(Optional.of(EXPECTED_RESULT));
+        String result = sorteoService.consultarResultadosSemanal(sorteosDto);
     }
     
 }
