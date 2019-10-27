@@ -7,7 +7,8 @@ public enum RequestEnum {
 	DATA_IS_MANDATORY_IDENTIFICADOR("El Identificador del  cliente es obligatorio"),
 	DATA_IS_MANDATORY_LLAVE("La llave  es obligatoria"),
 	DATA_IS_MANDATORY_USUARIO_ID("el usuario es obligatorio"),
-	SERVICE_NOT_AVAILABLE("El servicio {URL} no esta disponible");
+	SERVICE_NOT_AVAILABLE("El servicio {URL} no esta disponible"),
+	ALL_DATA_IS_NULL("La petición no contiente datos");
 	
 	private final String message;
 

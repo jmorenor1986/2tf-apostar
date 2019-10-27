@@ -4,6 +4,26 @@ operaciones:
     recargas:
       urlBase: /recarga
       urlRecargar: /recargar
+      urlConsultarSubproducto: /consultar-subproductos
+    betplay:
+      urlBase: /betplay
+      urlBetPlay: /asdasd
+      urlDos: /ased
+    recaudos:
+      urlBase: /recaudo
+      urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados: /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal: /consultar-resultado-sorteos-semanal
+distribuidor:
+  identificador: 8000015206
+  usuario-id: 8000015206
+  cliente-id: 8000015207
+  equipo-cliente-id: 1406
+  llave: KEY
+  clave: Qwerty1
 
 server:
   servlet:

@@ -1,5 +1,10 @@
 package com.dostf.apostar.services;
 
-public interface ISorteosService {
+import com.dostf.apostar.common.exceptions.MandatoryDtoMissingException;
+import com.dostf.apostar.dtos.sorteos.SorteosDto;
 
+public interface ISorteosService {
+    String consultarResultados(SorteosDto sorteosDto);
+  
+  String consultarResultadosSemanal(SorteosDto sorteosDto) throws MandatoryDtoMissingException;
 }
