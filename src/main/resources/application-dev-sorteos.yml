@@ -13,6 +13,9 @@ operaciones:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
       urlConsultarRecaudos: /consultar-recaudos
+      urlConsultarValor: /consultar-valor
+      urlGuardar: /guardar
+      urlConsultar: /consulta
     sorteos:
       urlBase: /resultado-sorteos
       urlConsultarResultados : /consultar-resultado-sorteos
