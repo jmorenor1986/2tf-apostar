@@ -5,6 +5,9 @@ operaciones:
       urlBase: /recarga
       urlRecargar: /recargar
       urlConsultarSubproducto: /consultar-subproductos
+      urlConsultarParametros: /consultar-parametros
+      urlConsultarTopes: /consultar-topes
+      urlConsultarParametrosPorSubproducto: /consultar-parametros-por-subproducto
     betplay:
       urlBase: /betplay
       urlBetPlay: /asdasd

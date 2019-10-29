@@ -1,6 +1,9 @@
 package com.dostf.apostar.controllers;
 
 import com.dostf.apostar.common.exceptions.ServiceNotAvailableException;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosDto;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosPorSubproductoDto;
+import com.dostf.apostar.dtos.recargas.ConsultarTopesDto;
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +32,20 @@ public class RecargasController {
   @PostMapping(value = "/{transaccion-distribuidor-id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public String consultarSubproducto(@PathVariable("transaccion-distribuidor-id") Long id ) throws ServiceNotAvailableException {
     return recargasService.consultarSubproducto(id);
+  }
+
+  @PostMapping(value = "/consultar-parametros", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String consultarParametros(@RequestBody ConsultarParametrosDto dto) {
+    return recargasService.consultarParametros(dto);
+  }
+
+  @PostMapping(value = "/consultar-topes", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String consultarTopes(@RequestBody ConsultarTopesDto dto) {
+    return recargasService.consultarTopes(dto);
+  }
+
+  @PostMapping(value = "/consultar-parametros-por-subproducto", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String consultarParametrosPorSubproducto(ConsultarParametrosPorSubproductoDto dto) {
+    return recargasService.consultarParametrosPorSubproducto(dto);
   }
 }

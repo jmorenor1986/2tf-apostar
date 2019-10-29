@@ -1,8 +1,13 @@
 package com.dostf.apostar.services.impl;
 
+import com.dostf.apostar.common.enums.ErrorEnum;
+import com.dostf.apostar.common.exceptions.MandatoryDtoMissingException;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecargasProperties;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosDto;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosPorSubproductoDto;
+import com.dostf.apostar.dtos.recargas.ConsultarTopesDto;
 import com.dostf.apostar.dtos.recargas.RecargaBaseDto;
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
@@ -33,7 +38,7 @@ public class RecargasService implements IRecargasService {
     }
 
     @Override
-    public String recargar(RecargarDto dto) {
+    public String recargar(final RecargarDto dto) {
         if (isNull(dto)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         final String requestUri = this.uri + recargasProperties.getUrlRecargar();
         dto.setDistribuidor(distribuidor);
@@ -43,11 +48,41 @@ public class RecargasService implements IRecargasService {
     }
 
     @Override
-    public String consultarSubproducto(Long id) {
+    public String consultarSubproducto(final Long id) {
         final String requestUri = this.uri + recargasProperties.getUrlConsultarSubproducto();
         RecargaBaseDto dto = new RecargaBaseDto();
         dto.setDistribuidor(distribuidor);
         dto.setTransaccionDistribuidorId(id);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String consultarParametros(final ConsultarParametrosDto dto) {
+        final String requestUri = this.uri + recargasProperties.getUrlConsultarParametros();
+        if(isNull(dto)) throw new MandatoryDtoMissingException(ErrorEnum.ALL_DATA_IS_NULL.getMessage());
+        dto.setDistribuidor(distribuidor);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String consultarTopes(ConsultarTopesDto dto) {
+        final String requestUri = this.uri + recargasProperties.getUrlConsultarTopes();
+        if(isNull(dto)) throw new MandatoryDtoMissingException(ErrorEnum.ALL_DATA_IS_NULL.getMessage());
+        dto.setDistribuidor(distribuidor);
+        dto.validateMandatoryFields();
+        return restTemplateService.post(requestUri, dto).orElseThrow(()
+            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String consultarParametrosPorSubproducto(final ConsultarParametrosPorSubproductoDto dto) {
+        final String requestUri = this.uri + recargasProperties.getUrlConsultarParametrosPorSubproducto();
+        if(isNull(dto)) throw new MandatoryDtoMissingException(ErrorEnum.ALL_DATA_IS_NULL.getMessage());
+        dto.setDistribuidor(distribuidor);
         dto.validateMandatoryFields();
         return restTemplateService.post(requestUri, dto).orElseThrow(()
             -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));

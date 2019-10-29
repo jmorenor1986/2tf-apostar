@@ -1,6 +1,9 @@
 package com.dostf.apostar.services;
 
 import com.dostf.apostar.common.exceptions.ServiceNotAvailableException;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosDto;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosPorSubproductoDto;
+import com.dostf.apostar.dtos.recargas.ConsultarTopesDto;
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 
 
@@ -13,7 +16,13 @@ public interface IRecargasService {
      * @return
      * @throws ServiceNotAvailableException
      */
-    String recargar(RecargarDto rechargeData) throws ServiceNotAvailableException;
+    String recargar(final RecargarDto rechargeData);
 
-    String consultarSubproducto(Long id);
+    String consultarSubproducto(final Long id);
+
+    String consultarParametros(final ConsultarParametrosDto consultarParametrosDto);
+
+    String consultarTopes(final ConsultarTopesDto dto);
+
+    String consultarParametrosPorSubproducto(final ConsultarParametrosPorSubproductoDto dto);
 }
