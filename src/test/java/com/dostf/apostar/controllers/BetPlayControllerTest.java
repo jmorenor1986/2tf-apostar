@@ -24,8 +24,8 @@ public class BetPlayControllerTest {
 
     @Test
     public void consultarSubProductos(){
-        Mockito.when(betPlayService.consultarSubProductos(Mockito.any())).thenReturn(EXPECTED_RESULT);
-        String result = betPlayController.consultarSubProductos(new BetPlayDto());
+        Mockito.when(betPlayService.consultarSubProductos(1l)).thenReturn(EXPECTED_RESULT);
+        String result = betPlayController.consultarSubProductos(1L);
         assertNotNull(result);
     }
 }

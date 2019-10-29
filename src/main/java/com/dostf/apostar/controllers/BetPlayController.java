@@ -3,7 +3,11 @@ package com.dostf.apostar.controllers;
 import com.dostf.apostar.dtos.betplay.BetPlayDto;
 import com.dostf.apostar.services.IBetPlayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+
+@RestController
+@RequestMapping("v1/betplay")
 public class BetPlayController {
 
     private final IBetPlayService betPlayService;
@@ -12,7 +16,8 @@ public class BetPlayController {
     this.betPlayService = betPlayService;
     }
 
-    public String consultarSubProductos(Object any) {
-        return betPlayService.consultarSubProductos(new BetPlayDto());
+    @PostMapping("/consultar-subproductos/{transaccion-distribuidor-id}")
+    public String consultarSubProductos(@PathVariable("transaccion-distribuidor-id") long transactionId) {
+        return betPlayService.consultarSubProductos(transactionId);
     }
 }

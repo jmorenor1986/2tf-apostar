@@ -14,4 +14,5 @@ public class OperacionesProperties {
   private RecargasProperties recargas;
   private SorteosProperties sorteos;
   private RecaudosProperties recaudos;
+  private BetPlayProperties betPlay;
 }

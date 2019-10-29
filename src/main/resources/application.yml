@@ -7,8 +7,7 @@ operaciones:
       urlConsultarSubproducto: /consultar-subproductos
     betplay:
       urlBase: /betplay
-      urlBetPlay: /asdasd
-      urlDos: /ased
+      urlConsultaSubproductos: /consultar-subproductos
     recaudos:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
