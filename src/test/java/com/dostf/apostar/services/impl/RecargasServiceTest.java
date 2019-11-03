@@ -1,10 +1,14 @@
 package com.dostf.apostar.services.impl;
 
+import com.dostf.apostar.common.exceptions.MandatoryDtoMissingException;
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.common.exceptions.SecureDistribuidorException;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.RecargasProperties;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosDto;
+import com.dostf.apostar.dtos.recargas.ConsultarParametrosPorSubproductoDto;
+import com.dostf.apostar.dtos.recargas.ConsultarTopesDto;
 import com.dostf.apostar.dtos.recargas.RecargarDto;
 import com.dostf.apostar.services.IRecargasService;
 import com.dostf.apostar.services.client.RestTemplateService;
@@ -33,6 +37,9 @@ public class RecargasServiceTest {
     private static final String CODIGO_SUBPRODUCTO = "CODIGO_SUBPRODUCTO";
     private static final String NUMERO_CELULAR = "3004139580";
     private static final double VALOR_A_RECARGAR = 100.0D;
+    private static final String URI_CONSULTAR_PARAMETROS = "/consultar-parametros";
+    private static final String URI_CONSULTAR_TOPES = "/consultar-topes";
+    private static final String URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO = "/consultar-parametros-por-subproducto";
     RecargasService recargasService;
 
     @Mock
@@ -73,24 +80,25 @@ public class RecargasServiceTest {
         Assert.assertNotNull(result);
     }
 
-    @Test
-    public void testConsultarSubproductoTransactionDistrubidorIdIsNullSuccess() {
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarSubproductoTransactionDistrubidorIdIsNull() {
         final String uri = URI_BASE_SERVICE + URI_CONSULTAR_SUBPRODUCTOS;
         when(recargasProperties.getUrlConsultarSubproducto()).thenReturn(URI_CONSULTAR_SUBPRODUCTOS);
         doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
-        String result = recargasService.consultarSubproducto(TRANSACCION_DISTRIBUIDOR_ID);
+        recargasService.consultarSubproducto(null);
     }
 
     @Test(expected = SecureDistribuidorException.class)
     public void testConsultarSubproductoMissingDistribuidor() {
         IRecargasService recargasServiceTestNull = new RecargasService(restTemplateService, properties, null);
-        String result = recargasServiceTestNull.consultarSubproducto(TRANSACCION_DISTRIBUIDOR_ID);
+        recargasServiceTestNull.consultarSubproducto(TRANSACCION_DISTRIBUIDOR_ID);
     }
 
+    // Recargar
     @Test(expected = SecureDistribuidorException.class)
     public void testRecargarMissingDistribuidor() {
         RecargasService recargasServiceTestNull = new RecargasService(restTemplateService, properties, null);
-        String result = recargasServiceTestNull.recargar(new RecargarDto());
+        recargasServiceTestNull.recargar(new RecargarDto());
     }
 
     @Test
@@ -107,7 +115,7 @@ public class RecargasServiceTest {
         Assert.assertNotNull(result);
     }
 
-    @Test
+    @Test(expected = MandatoryFieldsMissingException.class)
     public void testRecargarSuccessWithoutTransaccionDistribuidorId() {
         final String uri = URI_BASE_SERVICE + URI_CONSULTAR_RECARGAS;
         RecargarDto dto = new RecargarDto();
@@ -122,14 +130,14 @@ public class RecargasServiceTest {
 
     @Test(expected = ResponseStatusException.class)
     public void testRecargarWhenDtoIsNull() {
-        Object result = recargasService.recargar(null);
+        recargasService.recargar(null);
     }
 
     @Test(expected = MandatoryFieldsMissingException.class)
     public void testRecargarMissingNumero() {
         RecargarDto dto = new RecargarDto();
         dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
-        String result = recargasService.recargar(dto);
+        recargasService.recargar(dto);
     }
 
     @Test(expected = MandatoryFieldsMissingException.class)
@@ -137,7 +145,7 @@ public class RecargasServiceTest {
         RecargarDto dto = new RecargarDto();
         dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
         dto.setNumero(NUMERO_CELULAR);
-        String result = recargasService.recargar(dto);
+        recargasService.recargar(dto);
     }
 
     @Test(expected = MandatoryFieldsMissingException.class)
@@ -145,7 +153,7 @@ public class RecargasServiceTest {
         RecargarDto dto = new RecargarDto();
         dto.setNumero(NUMERO_CELULAR);
         dto.setValor(VALOR_A_RECARGAR);
-        String result = recargasService.recargar(dto);
+        recargasService.recargar(dto);
     }
 
     @Test(expected = ResponseStatusException.class)
@@ -161,5 +169,163 @@ public class RecargasServiceTest {
         String result = recargasService.recargar(dto);
         Assert.assertNotNull(result);
     }
+
+    // Consultar Parametros
+    @Test(expected = SecureDistribuidorException.class)
+    public void testConsultarParametrosMissingDistribuidor() {
+        RecargasService recargasServiceTestNull = new RecargasService(restTemplateService, properties, null);
+        recargasServiceTestNull.consultarParametros(new ConsultarParametrosDto());
+    }
+
+    @Test
+    public void testConsultarParametrosSuccess() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS;
+        ConsultarParametrosDto dto = new ConsultarParametrosDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametros()).thenReturn(URI_CONSULTAR_PARAMETROS);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarParametros(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarParametrosExceptionWithoutTransaccionDistribuidorId() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS;
+        ConsultarParametrosDto dto = new ConsultarParametrosDto();
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametros()).thenReturn(URI_CONSULTAR_PARAMETROS);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarParametros(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryDtoMissingException.class)
+    public void testConsultarParametrosWhenDtoIsNull() {
+        recargasService.consultarParametros(null);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarParametrosMissingCodigoSubproducto() {
+        ConsultarParametrosDto dto = new ConsultarParametrosDto();
+        recargasService.consultarParametros(dto);
+    }
+
+    @Test(expected = ResponseStatusException.class)
+    public void testConsultarParametrosNotFoundID() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS;
+        ConsultarParametrosDto dto = new ConsultarParametrosDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametros()).thenReturn(URI_CONSULTAR_PARAMETROS);
+        doReturn(Optional.empty()).when(restTemplateService).post(eq(uri), notNull());
+        recargasService.consultarParametros(dto);
+    }
+
+
+    // Consultar Topes
+    @Test(expected = SecureDistribuidorException.class)
+    public void testConsultarTopesMissingDistribuidor() {
+        RecargasService recargasServiceTestNull = new RecargasService(restTemplateService, properties, null);
+        recargasServiceTestNull.consultarTopes(new ConsultarTopesDto());
+    }
+
+    @Test
+    public void testConsultarTopesSuccess() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_TOPES;
+        ConsultarTopesDto dto = new ConsultarTopesDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarTopes()).thenReturn(URI_CONSULTAR_TOPES);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarTopes(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarTopesExceptionWithoutTransaccionDistribuidorId() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_TOPES;
+        ConsultarTopesDto dto = new ConsultarTopesDto();
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarTopes()).thenReturn(URI_CONSULTAR_TOPES);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarTopes(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryDtoMissingException.class)
+    public void testConsultarTopesWhenDtoIsNull() {
+        recargasService.consultarTopes(null);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarTopesMissingCodigoSubproducto() {
+        ConsultarTopesDto dto = new ConsultarTopesDto();
+        recargasService.consultarTopes(dto);
+    }
+
+    @Test(expected = ResponseStatusException.class)
+    public void testConsultarTopesNotFoundID() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_TOPES;
+        ConsultarTopesDto dto = new ConsultarTopesDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarTopes()).thenReturn(URI_CONSULTAR_TOPES);
+        doReturn(Optional.empty()).when(restTemplateService).post(eq(uri), notNull());
+        recargasService.consultarTopes(dto);
+    }
+
+    // Consultar ParametrosPorSubproducto
+    @Test(expected = SecureDistribuidorException.class)
+    public void testConsultarParametrosPorSubproductoMissingDistribuidor() {
+        RecargasService recargasServiceTestNull = new RecargasService(restTemplateService, properties, null);
+        recargasServiceTestNull.consultarParametrosPorSubproducto(new ConsultarParametrosPorSubproductoDto());
+    }
+
+    @Test
+    public void testConsultarParametrosPorSubproductoSuccess() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO;
+        ConsultarParametrosPorSubproductoDto dto = new ConsultarParametrosPorSubproductoDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametrosPorSubproducto()).thenReturn(URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarParametrosPorSubproducto(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarParametrosPorSubproductoExceptionWithoutTransaccionDistribuidorId() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO;
+        ConsultarParametrosPorSubproductoDto dto = new ConsultarParametrosPorSubproductoDto();
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametrosPorSubproducto()).thenReturn(URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), notNull());
+        String result = recargasService.consultarParametrosPorSubproducto(dto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryDtoMissingException.class)
+    public void testConsultarParametrosPorSubproductoWhenDtoIsNull() {
+        recargasService.consultarParametrosPorSubproducto(null);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarParametrosPorSubproductoMissingCodigoSubproducto() {
+        ConsultarParametrosPorSubproductoDto dto = new ConsultarParametrosPorSubproductoDto();
+        recargasService.consultarParametrosPorSubproducto(dto);
+    }
+
+    @Test(expected = ResponseStatusException.class)
+    public void testConsultarParametrosPorSubproductoNotFoundID() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO;
+        ConsultarParametrosPorSubproductoDto dto = new ConsultarParametrosPorSubproductoDto();
+        dto.setTransaccionDistribuidorId(TRANSACCION_DISTRIBUIDOR_ID);
+        dto.setCodigoSubproducto(CODIGO_SUBPRODUCTO);
+        when(recargasProperties.getUrlConsultarParametrosPorSubproducto()).thenReturn(URI_CONSULTAR_PARAMETROS_POR_SUBPRODUCTO);
+        doReturn(Optional.empty()).when(restTemplateService).post(eq(uri), notNull());
+        recargasService.consultarParametrosPorSubproducto(dto);
+    }
+
 
 }

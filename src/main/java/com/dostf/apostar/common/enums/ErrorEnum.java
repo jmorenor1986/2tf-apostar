@@ -11,7 +11,8 @@ public enum ErrorEnum {
 	IVA_IS_MANDATORY("Iva es obligatorio"),
 	XML_PARSING("Parsing xml to json"),
 	DATE_SORTEO_IS_MANDATORY("La fecha de sorteo es obligatoria"),
-	CODIGO_LOTERIA_IS_MANDATORY ("El código de la loteria es obligatorio");
+	CODIGO_LOTERIA_IS_MANDATORY ("El código de la loteria es obligatorio"),
+	ALL_DATA_IS_NULL("La petición no contiente datos");
 	private final String message;
 
 	ErrorEnum(String message) {
