@@ -13,6 +13,7 @@ operaciones:
       urlConsultaSubproductos: /consultar-subproductos
       urlSolicitarPin: /solicitar-pin
       urlRealizarRetiro: /realizar-retiro
+      urlRealizarRecaudo: /realizar-recaudo
     recaudos:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos

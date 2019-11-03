@@ -12,5 +12,5 @@ public class BetPlayProperties {
     private String urlConsultaSubProductos;
     private String urlSolicitarPin;
     private String urlRealizarRetiro;
-
+    private String urlRealizarRecaudo;
 }

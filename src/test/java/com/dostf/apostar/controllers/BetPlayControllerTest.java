@@ -44,5 +44,12 @@ public class BetPlayControllerTest {
         assertNotNull(result);
     }
 
+    @Test
+    public void realizarRecaudo(){
+        Mockito.when(betPlayService.realizaRecaudo(null)).thenReturn(EXPECTED_RESULT);
+        String result = betPlayController.realizaRecaudo(null);
+        assertNotNull(result);
+    }
+
 
 }

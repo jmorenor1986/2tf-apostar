@@ -2,6 +2,7 @@ package com.dostf.apostar.controllers;
 
 import com.dostf.apostar.dtos.betplay.BetPlayDto;
 import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
+import com.dostf.apostar.dtos.betplay.BetPlayRecaudoDto;
 import com.dostf.apostar.dtos.betplay.BetPlayRetiroDto;
 import com.dostf.apostar.services.IBetPlayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class BetPlayController {
     @PostMapping(value = "/realizar-retiro", produces = MediaType.APPLICATION_JSON_VALUE)
     public String realizarRetiro(@RequestBody BetPlayRetiroDto betPlayRetiroDto) {
         return betPlayService.realizarRetiro(betPlayRetiroDto);
+    }
+
+    @PostMapping(value = "/realizar-recaudo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String realizaRecaudo(@RequestBody BetPlayRecaudoDto betPlayRecaudoDto) {
+        return betPlayService.realizaRecaudo(betPlayRecaudoDto);
     }
 }

@@ -18,7 +18,8 @@ public enum ErrorEnum {
 	PING_CLIENT_IS_MANDATORY("El ping cliente es obligatorio"),
 	VALOR_IS_MANDATORY("El valor es obligatorio"),
 	MONTO_IS_MANDATORY("El monto es obligatorio"),
-	REGISTRAR_RETIRO_IS_MANDATORY("Los datos para registrar el retiro son obligatorios");
+	REGISTRAR_RETIRO_IS_MANDATORY("Los datos para registrar el retiro son obligatorios"),
+	REGISTRAR_RECAUDO_IS_MANDATORY("Los datos para registrar el recaudo son obligatorios");
 	private final String message;
 
 	ErrorEnum(String message) {

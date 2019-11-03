@@ -148,4 +148,62 @@ public class BetPlayServiceTest {
         String result = betPlayService.realizarRetiro(betPlayRetiroDto);
     }
 
+    @Test
+    public void testRealizaRecaudosSuccess() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(BetPlayServiceTest.URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRecaudo()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRecaudoDto betPlayRecaudoDto = new BetPlayRecaudoDto();
+        RegisraRecaudoDto regisraRecaudoDto = new RegisraRecaudoDto();
+        regisraRecaudoDto.setClienteId("1");
+        regisraRecaudoDto.setValor(0.0);
+        regisraRecaudoDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        betPlayRecaudoDto.setRegisraRecaudoDto(regisraRecaudoDto);
+        String result = betPlayService.realizaRecaudo(betPlayRecaudoDto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testRealizaRecaudsosSubProductoIsNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(BetPlayServiceTest.URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRecaudo()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRecaudoDto betPlayRecaudoDto = new BetPlayRecaudoDto();
+        RegisraRecaudoDto regisraRecaudoDto = new RegisraRecaudoDto();
+        regisraRecaudoDto.setClienteId("1");
+        regisraRecaudoDto.setValor(0.0);
+        regisraRecaudoDto.setSubProductoBetPlayDto(null);
+        betPlayRecaudoDto.setRegisraRecaudoDto(regisraRecaudoDto);
+        String result = betPlayService.realizaRecaudo(betPlayRecaudoDto);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testRealizarRecaudosClienteIdNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(BetPlayServiceTest.URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRecaudo()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRecaudoDto betPlayRecaudoDto = new BetPlayRecaudoDto();
+        RegisraRecaudoDto regisraRecaudoDto = new RegisraRecaudoDto();
+        regisraRecaudoDto.setClienteId(null);
+        regisraRecaudoDto.setValor(0.0);
+        regisraRecaudoDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        betPlayRecaudoDto.setRegisraRecaudoDto(regisraRecaudoDto);
+        String result = betPlayService.realizaRecaudo(betPlayRecaudoDto);
+    }
+
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testRealizarRecaudosRecaudoNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(BetPlayServiceTest.URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRecaudo()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRecaudoDto betPlayRecaudoDto = new BetPlayRecaudoDto();
+        RegisraRecaudoDto regisraRecaudoDto = new RegisraRecaudoDto();
+        regisraRecaudoDto.setClienteId("c");
+        regisraRecaudoDto.setValor(null);
+        regisraRecaudoDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        betPlayRecaudoDto.setRegisraRecaudoDto(regisraRecaudoDto);
+        String result = betPlayService.realizaRecaudo(betPlayRecaudoDto);
+    }
+
 }
