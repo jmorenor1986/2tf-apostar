@@ -10,4 +10,6 @@ import org.springframework.stereotype.Component;
 public class BetPlayProperties {
     private String urlBase;
     private String urlConsultaSubProductos;
+    private String urlSolicitarPin;
+
 }

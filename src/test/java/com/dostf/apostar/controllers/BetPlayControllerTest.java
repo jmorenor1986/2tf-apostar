@@ -1,6 +1,7 @@
 package com.dostf.apostar.controllers;
 
 import com.dostf.apostar.dtos.betplay.BetPlayDto;
+import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
 import com.dostf.apostar.services.IBetPlayService;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,15 +18,22 @@ public class BetPlayControllerTest {
     private BetPlayController betPlayController;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         betPlayController = new BetPlayController(betPlayService);
     }
 
     @Test
-    public void consultarSubProductos(){
+    public void consultarSubProductos() {
         Mockito.when(betPlayService.consultarSubProductos(1l)).thenReturn(EXPECTED_RESULT);
         String result = betPlayController.consultarSubProductos(1L);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void solicitarPin() {
+        Mockito.when(betPlayService.solicitarPin(null)).thenReturn(EXPECTED_RESULT);
+        String result = betPlayController.solicitarPin(null);
         assertNotNull(result);
     }
 }

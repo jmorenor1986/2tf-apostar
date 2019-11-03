@@ -12,7 +12,9 @@ public enum ErrorEnum {
 	XML_PARSING("Parsing xml to json"),
 	DATE_SORTEO_IS_MANDATORY("La fecha de sorteo es obligatoria"),
 	CODIGO_LOTERIA_IS_MANDATORY ("El código de la loteria es obligatorio"),
-	ALL_DATA_IS_NULL("La petición no contiente datos");
+	ALL_DATA_IS_NULL("La petición no contiente datos"),
+	SUBPRODUCTO_IS_MANDATORY("El subproducto es obligatorio"),
+	MONTO_IS_MANDATORY("El subproducto es obligatorio");
 	private final String message;
 
 	ErrorEnum(String message) {

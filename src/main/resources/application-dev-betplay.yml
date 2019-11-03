@@ -8,6 +8,7 @@ operaciones:
     betplay:
       urlBase: /betplay
       urlConsultaSubproductos: /consultar-subproductos
+      urlSolicitarPin: /solicitar-pin
 
     recaudos:
       urlBase: /recaudo

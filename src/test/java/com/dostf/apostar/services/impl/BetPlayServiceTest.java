@@ -1,8 +1,13 @@
 package com.dostf.apostar.services.impl;
 
+import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.config.properties.BetPlayProperties;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
+import com.dostf.apostar.dtos.betplay.BetPlayDto;
+import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
+import com.dostf.apostar.dtos.betplay.SolicitarPinDto;
+import com.dostf.apostar.dtos.betplay.SubProductoBetPlayDto;
 import com.dostf.apostar.services.IBetPlayService;
 import com.dostf.apostar.services.IRestTemplateService;
 import org.junit.Assert;
@@ -25,6 +30,7 @@ public class BetPlayServiceTest {
     public static final String URI_CONSULTAR_SUBPRODUCTOS = "/consultar-subproductos";
     private static final long TRANSACCION_DISTRIBUIDOR_ID = 0L;
     private static final String EXPECTED_RESULT = "{\"result\": \"result\"}";
+    public static final String URI_SOLICITAR_PIN = "/solicitar-pin";
     private IBetPlayService betPlayService;
     @Mock
     private IRestTemplateService restTemplateService;
@@ -63,4 +69,44 @@ public class BetPlayServiceTest {
         String result = betPlayService.consultarSubProductos(TRANSACCION_DISTRIBUIDOR_ID);
         Assert.assertNotNull(result);
     }
+
+    //Test solicitar pin
+
+    @Test
+    public void testSolicitarPinSucess() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_SOLICITAR_PIN);
+        Mockito.when(betPlayProperties.getUrlSolicitarPin()).thenReturn(URI_SOLICITAR_PIN);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayPinDto betPlayPinDto = new BetPlayPinDto();
+        SolicitarPinDto solicitarPinDto = new SolicitarPinDto();
+        solicitarPinDto.setMonto(1.0);
+        solicitarPinDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        betPlayPinDto.setSolicitarPinDto(solicitarPinDto);
+        String result = betPlayService.solicitarPin(betPlayPinDto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testSolicitarPinNotFoundSubProducto() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_SOLICITAR_PIN);
+        Mockito.when(betPlayProperties.getUrlSolicitarPin()).thenReturn(URI_SOLICITAR_PIN);
+        BetPlayPinDto betPlayPinDto = new BetPlayPinDto();
+        SolicitarPinDto solicitarPinDto = new SolicitarPinDto();
+        solicitarPinDto.setSubProductoBetPlayDto(null);
+        betPlayPinDto.setSolicitarPinDto(solicitarPinDto);
+        String result = betPlayService.solicitarPin(betPlayPinDto);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testSolicitarPinMontoIsNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_SOLICITAR_PIN);
+        Mockito.when(betPlayProperties.getUrlSolicitarPin()).thenReturn(URI_SOLICITAR_PIN);
+        BetPlayPinDto betPlayPinDto = new BetPlayPinDto();
+        SolicitarPinDto solicitarPinDto = new SolicitarPinDto();
+        solicitarPinDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        solicitarPinDto.setMonto(null);
+        betPlayPinDto.setSolicitarPinDto(solicitarPinDto);
+        String result = betPlayService.solicitarPin(betPlayPinDto);
+    }
+
 }
