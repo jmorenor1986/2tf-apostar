@@ -4,10 +4,7 @@ import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.config.properties.BetPlayProperties;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
-import com.dostf.apostar.dtos.betplay.BetPlayDto;
-import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
-import com.dostf.apostar.dtos.betplay.SolicitarPinDto;
-import com.dostf.apostar.dtos.betplay.SubProductoBetPlayDto;
+import com.dostf.apostar.dtos.betplay.*;
 import com.dostf.apostar.services.IBetPlayService;
 import com.dostf.apostar.services.IRestTemplateService;
 import org.junit.Assert;
@@ -31,6 +28,7 @@ public class BetPlayServiceTest {
     private static final long TRANSACCION_DISTRIBUIDOR_ID = 0L;
     private static final String EXPECTED_RESULT = "{\"result\": \"result\"}";
     public static final String URI_SOLICITAR_PIN = "/solicitar-pin";
+    public static final String URI_REALIZAR_RETIRO = "/realizar-retiro";
     private IBetPlayService betPlayService;
     @Mock
     private IRestTemplateService restTemplateService;
@@ -107,6 +105,47 @@ public class BetPlayServiceTest {
         solicitarPinDto.setMonto(null);
         betPlayPinDto.setSolicitarPinDto(solicitarPinDto);
         String result = betPlayService.solicitarPin(betPlayPinDto);
+    }
+
+    @Test
+    public void testRealizarRetiroSucess() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRetiro()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRetiroDto betPlayRetiroDto = new BetPlayRetiroDto();
+        RegistraRetiroDto registraRetiroDto = new RegistraRetiroDto();
+        registraRetiroDto.setClienteId("1");
+        registraRetiroDto.setPingCliente("2");
+        registraRetiroDto.setValor(1.0);
+        registraRetiroDto.setSubProductoBetPlayDto(new SubProductoBetPlayDto());
+        betPlayRetiroDto.setRegistraRetiroDto(registraRetiroDto);
+        String result = betPlayService.realizarRetiro(betPlayRetiroDto);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testRealizaRetiroSubProductoIsNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRetiro()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRetiroDto betPlayRetiroDto = new BetPlayRetiroDto();
+        RegistraRetiroDto registraRetiroDto = new RegistraRetiroDto();
+        registraRetiroDto.setClienteId("1");
+        registraRetiroDto.setPingCliente("2");
+        registraRetiroDto.setValor(1.0);
+        registraRetiroDto.setSubProductoBetPlayDto(null);
+        betPlayRetiroDto.setRegistraRetiroDto(registraRetiroDto);
+        String result = betPlayService.realizarRetiro(betPlayRetiroDto);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testRealizaRetiroDtoIsNull() {
+        final String uri = URI_BASE.concat(URI_BETPLAY).concat(URI_REALIZAR_RETIRO);
+        Mockito.when(betPlayProperties.getUrlRealizarRetiro()).thenReturn(URI_REALIZAR_RETIRO);
+        doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), any());
+        BetPlayRetiroDto betPlayRetiroDto = new BetPlayRetiroDto();
+        betPlayRetiroDto.setRegistraRetiroDto(null);
+        String result = betPlayService.realizarRetiro(betPlayRetiroDto);
     }
 
 }

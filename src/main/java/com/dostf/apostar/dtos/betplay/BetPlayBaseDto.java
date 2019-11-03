@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 
 @Getter
 @Setter
-@JacksonXmlRootElement(localName = "recaudo-input")
+@JacksonXmlRootElement(localName = "betplay-input")
 public class BetPlayBaseDto {
     @ApiModelProperty(hidden = true)
     @NotNull

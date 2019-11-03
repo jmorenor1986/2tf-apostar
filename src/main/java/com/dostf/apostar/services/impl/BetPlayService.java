@@ -5,6 +5,7 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.dtos.betplay.BetPlayDto;
 import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
+import com.dostf.apostar.dtos.betplay.BetPlayRetiroDto;
 import com.dostf.apostar.services.IBetPlayService;
 import com.dostf.apostar.services.IRestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,14 @@ public class BetPlayService implements IBetPlayService {
         betPlayPinDto.setDistribuidor(distribuidorProperties);
         betPlayPinDto.validateMandatoryFields();
         return restTemplateService.post(requestUri,betPlayPinDto).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Not found"));
+    }
+
+    @Override
+    public String realizarRetiro(BetPlayRetiroDto betPlayRetiroDto) {
+        final String requestUri = this.uri.concat(betPlayProperties.getUrlRealizarRetiro());
+        betPlayRetiroDto.setDistribuidor(distribuidorProperties);
+        betPlayRetiroDto.validateMandatoryFields();
+        return restTemplateService.post(requestUri,betPlayRetiroDto).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Not found"));
     }
 
 

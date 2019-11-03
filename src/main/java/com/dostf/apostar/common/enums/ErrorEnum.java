@@ -14,7 +14,11 @@ public enum ErrorEnum {
 	CODIGO_LOTERIA_IS_MANDATORY ("El código de la loteria es obligatorio"),
 	ALL_DATA_IS_NULL("La petición no contiente datos"),
 	SUBPRODUCTO_IS_MANDATORY("El subproducto es obligatorio"),
-	MONTO_IS_MANDATORY("El subproducto es obligatorio");
+	CLIENT_ID_IS_MANDATORY("El cliente id es obligatorio"),
+	PING_CLIENT_IS_MANDATORY("El ping cliente es obligatorio"),
+	VALOR_IS_MANDATORY("El valor es obligatorio"),
+	MONTO_IS_MANDATORY("El monto es obligatorio"),
+	REGISTRAR_RETIRO_IS_MANDATORY("Los datos para registrar el retiro son obligatorios");
 	private final String message;
 
 	ErrorEnum(String message) {

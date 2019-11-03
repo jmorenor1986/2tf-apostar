@@ -36,4 +36,13 @@ public class BetPlayControllerTest {
         String result = betPlayController.solicitarPin(null);
         assertNotNull(result);
     }
+
+    @Test
+    public void realizarRetiro(){
+        Mockito.when(betPlayService.realizarRetiro(null)).thenReturn(EXPECTED_RESULT);
+        String result = betPlayController.realizarRetiro(null);
+        assertNotNull(result);
+    }
+
+
 }
