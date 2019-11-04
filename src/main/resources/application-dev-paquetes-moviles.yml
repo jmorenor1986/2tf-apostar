@@ -1,0 +1,43 @@
+operaciones:
+  api:
+    urlBase: http://172.17.254.17/web-services-seta-apostar/api
+    recargas:
+      urlBase: /recarga
+      urlRecargar: /recargar
+      urlConsultarSubproducto: /consultar-subproductos
+      urlConsultarParametros: /consultar-parametros
+      urlConsultarTopes: /consultar-topes
+      urlConsultarParametrosPorSubproducto: /consultar-parametros-por-subproducto
+    betplay:
+      urlBase: /betplay
+      urlConsultaSubproductos: /consultar-subproductos
+      urlSolicitarPin: /solicitar-pin
+      urlRealizarRetiro: /realizar-retiro
+      urlRealizarRecaudo: /realizar-recaudo
+    recaudos:
+      urlBase: /recaudo
+      urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
+      urlConsultarValor: /consultar-valor
+      urlGuardar: /guardar
+      urlConsultar: /consulta
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados: /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal: /consultar-resultado-sorteos-semanal
+    paquetesMoviles:
+      urlBase: /paquetes-moviles
+      urlConsultaSubProductos: /consultar-subproductos-paquetes
+distribuidor:
+  identificador: 8000015206
+  usuario-id: 8000015206
+  cliente-id: 8000015207
+  equipo-cliente-id: 1406
+  llave: KEY
+  clave: Qwerty1
+
+server:
+  servlet:
+    context-path: /dostf-apostar
+  port: 5000
+
