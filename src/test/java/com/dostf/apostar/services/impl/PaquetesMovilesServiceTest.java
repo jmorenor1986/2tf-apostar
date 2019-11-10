@@ -24,6 +24,7 @@ public class PaquetesMovilesServiceTest {
     public static final String URI_PAQUETES_MOVILES = "/paquetes-moviles";
     public static final String URI_CONSULTAR_SUBPRODUCTOS_PAQUETES = "/consultar-subproductos-paquetes ";
     public static final String EXPECTED_RESULT = "{\"result\": \"result\"}";
+    public static final String URI_CONSULTAR_PAQUETES = "/consultar-paquetes";
     private IPaquetesMovilesService paquetesMovilesService;
     @Mock
     private IRestTemplateService restTemplateService;
@@ -42,6 +43,7 @@ public class PaquetesMovilesServiceTest {
         Mockito.when(operacionesProperties.getUrlBase()).thenReturn(URI_BASE);
         Mockito.when(paquetesMovilesProperties.getUrlBase()).thenReturn(URI_PAQUETES_MOVILES);
         Mockito.when(paquetesMovilesProperties.getUrlConsultaSubProductos()).thenReturn(URI_CONSULTAR_SUBPRODUCTOS_PAQUETES);
+        Mockito.when(paquetesMovilesProperties.getUrlConsultaPaquetes()).thenReturn(URI_CONSULTAR_PAQUETES);
         paquetesMovilesService = new PaquetesMovilesService(restTemplateService, operacionesProperties, distribuidorProperties);
     }
 
@@ -58,5 +60,26 @@ public class PaquetesMovilesServiceTest {
         final String uri = URI_BASE_SERVICE + URI_CONSULTAR_SUBPRODUCTOS_PAQUETES;
         Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), Mockito.any());
         String result = paquetesMovilesService.consultarSubProductos(null);
+    }
+    @Test
+    public void testConsultarPaquetesSuccess(){
+        final String uri = URI_BASE_SERVICE+ URI_CONSULTAR_PAQUETES;
+        Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri),Mockito.any());
+        String result = paquetesMovilesService.consultarPaquetes(1L,1L);
+        Assert.assertNotNull(result);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarPaquetesTransactionIdIsNull() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PAQUETES;
+        Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), Mockito.any());
+        String result = paquetesMovilesService.consultarPaquetes(null,1L);
+    }
+
+    @Test(expected = MandatoryFieldsMissingException.class)
+    public void testConsultarPaquetesSubProductoIsNull() {
+        final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PAQUETES;
+        Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), Mockito.any());
+        String result = paquetesMovilesService.consultarPaquetes(1L,null);
     }
 }

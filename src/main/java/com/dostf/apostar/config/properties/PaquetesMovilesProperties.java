@@ -10,5 +10,6 @@ import org.springframework.stereotype.Component;
 public class PaquetesMovilesProperties {
     private String urlBase;
     private String urlConsultaSubProductos;
+    private String urlConsultaPaquetes;
 
 }

@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 
 @Getter
 @Setter
-@JacksonXmlRootElement(localName = "transaccion-distribuidor-id")
+@JacksonXmlRootElement(localName = "subproductos-paquetes-input")
 public class PaquetesMovilesBaseDto {
 
     @ApiModelProperty(hidden = true)
