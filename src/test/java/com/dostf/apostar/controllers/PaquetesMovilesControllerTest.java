@@ -27,4 +27,11 @@ public class PaquetesMovilesControllerTest {
         Assert.assertNotNull(result);
     }
 
+    @Test
+    public void testConsultarPaquetes(){
+        Mockito.when(paquetesMovilesService.consultarPaquetes(1l,1l)).thenReturn(EXPECTED_RESULT);
+        String result = paquetesMovilesController.consultarPaquetes(1L,1L);
+        Assert.assertNotNull(result);
+    }
+
 }

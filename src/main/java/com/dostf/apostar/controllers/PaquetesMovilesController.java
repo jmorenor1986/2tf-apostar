@@ -24,4 +24,9 @@ public class PaquetesMovilesController {
     public String consultaSubProductos(@PathVariable("transaccion-distribuidor-id") Long transactionId) {
         return paquetesMovilesService.consultarSubProductos(transactionId);
     }
+
+    @PostMapping(value = "/consultar-paquetes/{transaccion-distribuidor-id}/{codigo-sub-producto}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String consultarPaquetes(@PathVariable("transaccion-distribuidor-id")Long transactionId, @PathVariable("codigo-sub-producto")Long subproducto) {
+        return paquetesMovilesService.consultarPaquetes(transactionId,subproducto);
+    }
 }
