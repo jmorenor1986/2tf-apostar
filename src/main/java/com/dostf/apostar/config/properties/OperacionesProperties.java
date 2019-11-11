@@ -15,4 +15,5 @@ public class OperacionesProperties {
   private SorteosProperties sorteos;
   private RecaudosProperties recaudos;
   private BetPlayProperties betPlay;
+  private VentaPinesProperties ventaPines;
 }

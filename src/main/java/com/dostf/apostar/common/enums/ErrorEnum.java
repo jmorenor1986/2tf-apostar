@@ -19,7 +19,11 @@ public enum ErrorEnum {
 	VALOR_IS_MANDATORY("El valor es obligatorio"),
 	MONTO_IS_MANDATORY("El monto es obligatorio"),
 	REGISTRAR_RETIRO_IS_MANDATORY("Los datos para registrar el retiro son obligatorios"),
-	REGISTRAR_RECAUDO_IS_MANDATORY("Los datos para registrar el recaudo son obligatorios");
+	REGISTRAR_RECAUDO_IS_MANDATORY("Los datos para registrar el recaudo son obligatorios"),
+	SERVICIO_IS_MANDATORY("Servicio es obligratorio"),
+	SUBPRODUCTO_SETA_IS_MANDATORY("Subproducto Seta es obligatorio"),
+	SUBPRODUCTO_PIN_IS_MANDATORY("Subproducto Pin es obligatorio"),
+	SERVICIO_CONSULTAR_IS_MANDATORY("Servicio a consultar es obligatorio");
 	private final String message;
 
 	ErrorEnum(String message) {
