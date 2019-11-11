@@ -3,6 +3,8 @@ package com.dostf.apostar.services.impl;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.PaquetesMovilesProperties;
+import com.dostf.apostar.dtos.paquetesMoviles.GuardarPaqueteMovilDto;
+import com.dostf.apostar.dtos.paquetesMoviles.PaqueteMovilDto;
 import com.dostf.apostar.dtos.paquetesMoviles.PaquetesMovilesDto;
 import com.dostf.apostar.dtos.paquetesMoviles.SubProductosPaquetesMovilesDto;
 import com.dostf.apostar.services.IPaquetesMovilesService;
@@ -48,6 +50,14 @@ public class PaquetesMovilesService implements IPaquetesMovilesService {
         paquetesMovilesDto.setTransaccionDistribuidorId(transactionId);
         paquetesMovilesDto.setDistribuidor(distribuidorProperties);
         paquetesMovilesDto.validateMandatoryFieldsPaquetes();
-        return  restTemplateService.post(requestUri,paquetesMovilesDto).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Not Found"));
+        return restTemplateService.post(requestUri, paquetesMovilesDto).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
+    }
+
+    @Override
+    public String guardarPaquetesMoviles(GuardarPaqueteMovilDto guardarPaqueteMovilDto) {
+        final String requestUri = this.uri.concat(paquetesMovilesProperties.getUrlGuardarPaquetesMoviles());
+        guardarPaqueteMovilDto.setDistribuidor(distribuidorProperties);
+        guardarPaqueteMovilDto.validateFieldMandatory();
+        return restTemplateService.post(requestUri, guardarPaqueteMovilDto).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
     }
 }
