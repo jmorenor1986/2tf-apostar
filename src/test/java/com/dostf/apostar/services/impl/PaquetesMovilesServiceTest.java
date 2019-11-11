@@ -72,7 +72,7 @@ public class PaquetesMovilesServiceTest {
     public void testConsultarPaquetesSuccess() {
         final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PAQUETES;
         Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), Mockito.any());
-        String result = paquetesMovilesService.consultarPaquetes(1L, 1L);
+        String result = paquetesMovilesService.consultarPaquetes(1L, "");
         Assert.assertNotNull(result);
     }
 
@@ -80,7 +80,7 @@ public class PaquetesMovilesServiceTest {
     public void testConsultarPaquetesTransactionIdIsNull() {
         final String uri = URI_BASE_SERVICE + URI_CONSULTAR_PAQUETES;
         Mockito.doReturn(Optional.of(EXPECTED_RESULT)).when(restTemplateService).post(eq(uri), Mockito.any());
-        String result = paquetesMovilesService.consultarPaquetes(null, 1L);
+        String result = paquetesMovilesService.consultarPaquetes(null, "");
     }
 
     @Test(expected = MandatoryFieldsMissingException.class)

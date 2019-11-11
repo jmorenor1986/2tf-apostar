@@ -7,7 +7,7 @@ import com.dostf.apostar.dtos.paquetesMoviles.SubProductosPaquetesMovilesDto;
 public interface IPaquetesMovilesService {
     String consultarSubProductos(Long transactionId);
 
-    String consultarPaquetes(Long transactionId, Long subproducto);
+    String consultarPaquetes(Long transactionId, String subproducto);
 
     String guardarPaquetesMoviles(GuardarPaqueteMovilDto guardarPaqueteMovilDto);
 }

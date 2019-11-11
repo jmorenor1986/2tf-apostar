@@ -43,7 +43,7 @@ public class PaquetesMovilesService implements IPaquetesMovilesService {
     }
 
     @Override
-    public String consultarPaquetes(Long transactionId, Long subproducto) {
+    public String consultarPaquetes(Long transactionId, String subproducto) {
         final String requestUri = this.uri.concat(paquetesMovilesProperties.getUrlConsultaPaquetes());
         PaquetesMovilesDto paquetesMovilesDto = new PaquetesMovilesDto();
         paquetesMovilesDto.setCodigoSubproducto(subproducto);

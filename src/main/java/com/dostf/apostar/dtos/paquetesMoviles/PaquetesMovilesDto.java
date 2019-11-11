@@ -14,7 +14,7 @@ import java.util.Objects;
 @JacksonXmlRootElement(localName = "paquetes-input")
 public class PaquetesMovilesDto extends PaquetesMovilesBaseDto {
     @JacksonXmlProperty(localName = "codigo-subproducto")
-    private Long codigoSubproducto;
+    private String codigoSubproducto;
 
     public void validateMandatoryFieldsPaquetes() {
         if (Objects.isNull(codigoSubproducto))

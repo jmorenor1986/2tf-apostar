@@ -1,5 +1,7 @@
 package com.dostf.apostar.controllers;
 
+import com.dostf.apostar.dtos.paquetesMoviles.GuardarPaqueteMovilDto;
+import com.dostf.apostar.dtos.paquetesMoviles.PaquetesMovilesDto;
 import com.dostf.apostar.services.IPaquetesMovilesService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +15,8 @@ public class PaquetesMovilesControllerTest {
     private PaquetesMovilesController paquetesMovilesController;
     @Mock
     private IPaquetesMovilesService paquetesMovilesService;
+    @Mock
+    private GuardarPaqueteMovilDto guardarPaqueteMovilDto;
 
     @Before
     public void setup() {
@@ -28,9 +32,16 @@ public class PaquetesMovilesControllerTest {
     }
 
     @Test
-    public void testConsultarPaquetes(){
-        Mockito.when(paquetesMovilesService.consultarPaquetes(1l,1l)).thenReturn(EXPECTED_RESULT);
-        String result = paquetesMovilesController.consultarPaquetes(1L,1L);
+    public void testConsultarPaquetes() {
+        Mockito.when(paquetesMovilesService.consultarPaquetes(1l, "")).thenReturn(EXPECTED_RESULT);
+        String result = paquetesMovilesController.consultarPaquetes(1L, "");
+        Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void testGuardarPaquetesMoviles() {
+        Mockito.when(paquetesMovilesService.guardarPaquetesMoviles(guardarPaqueteMovilDto)).thenReturn(EXPECTED_RESULT);
+        String result = paquetesMovilesController.guardaPaquetesMoviles(guardarPaqueteMovilDto);
         Assert.assertNotNull(result);
     }
 

@@ -14,7 +14,7 @@ import java.util.Objects;
 @JacksonXmlRootElement(localName = "paquete-movil")
 public class PaqueteMovilDto {
     @JacksonXmlProperty(localName = "codigo-subproducto")
-    private Long codigoSubproducto;
+    private String codigoSubproducto;
     private Long valor;
     private Long numero;
     private Long id;

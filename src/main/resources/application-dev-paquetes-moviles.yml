@@ -29,6 +29,7 @@ operaciones:
       urlBase: /paquetes-moviles
       urlConsultaSubProductos: /consultar-subproductos-paquetes
       urlConsultaPaquetes: /consultar-paquetes
+      urlGuardarPaquetesMoviles: /guardar
 distribuidor:
   identificador: 8000015206
   usuario-id: 8000015206

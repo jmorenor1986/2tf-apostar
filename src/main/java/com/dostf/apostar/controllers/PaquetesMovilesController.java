@@ -1,13 +1,10 @@
 package com.dostf.apostar.controllers;
 
-import com.dostf.apostar.dtos.paquetesMoviles.SubProductosPaquetesMovilesDto;
+import com.dostf.apostar.dtos.paquetesMoviles.GuardarPaqueteMovilDto;
 import com.dostf.apostar.services.IPaquetesMovilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,7 +23,12 @@ public class PaquetesMovilesController {
     }
 
     @PostMapping(value = "/consultar-paquetes/{transaccion-distribuidor-id}/{codigo-sub-producto}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String consultarPaquetes(@PathVariable("transaccion-distribuidor-id")Long transactionId, @PathVariable("codigo-sub-producto")Long subproducto) {
+    public String consultarPaquetes(@PathVariable("transaccion-distribuidor-id")Long transactionId, @PathVariable("codigo-sub-producto")String subproducto) {
         return paquetesMovilesService.consultarPaquetes(transactionId,subproducto);
+    }
+
+    @PostMapping(value = "/guardar-paquete", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String guardaPaquetesMoviles(@RequestBody GuardarPaqueteMovilDto guardarPaqueteMovilDto) {
+        return paquetesMovilesService.guardarPaquetesMoviles(guardarPaqueteMovilDto);
     }
 }
