@@ -1,6 +1,6 @@
 operaciones:
   api:
-    urlBase: http://172.17.254.17/web-services-seta-apostar/api
+    urlBase: https://172.17.10.67:28184/web-services-seta-apostar/api
     recargas:
       urlBase: /recarga
       urlRecargar: /recargar
