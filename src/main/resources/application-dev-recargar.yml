@@ -5,6 +5,9 @@ operaciones:
       urlBase: /recarga
       urlRecargar: /recargar
       urlConsultarSubproducto: /consultar-subproductos
+      urlConsultarParametros: /consultar-parametros
+      urlConsultarTopes: /consultar-topes
+      urlConsultarParametrosPorSubproducto: /consultar-parametros-por-subproducto
     betplay:
       urlBase: /betplay
       urlBetPlay: /asdasd
@@ -13,6 +16,9 @@ operaciones:
       urlBase: /recaudo
       urlConsultarDepartamentos: /consultar-departamentos
       urlConsultarRecaudos: /consultar-recaudos
+      urlConsultarValor: /consultar-valor
+      urlGuardar: /guardar
+      urlConsultar: /consulta
     sorteos:
       urlBase: /resultado-sorteos
       urlConsultarResultados : /consultar-resultado-sorteos

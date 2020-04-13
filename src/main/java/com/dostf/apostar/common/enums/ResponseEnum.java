@@ -4,7 +4,7 @@ public enum ResponseEnum {
   NOT_FOUND_SERVICE("No se encuentra el servicio");
   private final String message;
   
-  private ResponseEnum(String message) {
+  ResponseEnum(String message) {
     this.message = message;
   }
   

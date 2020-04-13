@@ -15,6 +15,6 @@ public class GenericDto {
     protected String codigo;
 
     public void validateMandatoryFields() {
-        if(StringUtils.isEmpty(codigo)) throw new MandatoryFieldsMissingException(ErrorEnum.DEPARTAMENTO_IS_MANDATORY.getMessage());
+        if(StringUtils.isEmpty(codigo)) throw new MandatoryFieldsMissingException(ErrorEnum.CODIGO_IS_MANDATORY.getMessage());
     }
 }

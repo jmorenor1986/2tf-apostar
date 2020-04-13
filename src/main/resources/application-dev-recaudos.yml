@@ -1,0 +1,38 @@
+operaciones:
+  api:
+    urlBase: http://172.17.254.17/web-services-seta-apostar/api
+    recargas:
+      urlBase: /recarga
+      urlRecargar: /recargar
+      urlConsultarSubproducto: /consultar-subproductos
+      urlConsultarParametros: /consultar-parametros
+      urlConsultarTopes: /consultar-topes
+      urlConsultarParametrosPorSubproducto: /consultar-parametros-por-subproducto
+    betplay:
+      urlBase: /betplay
+      urlBetPlay: /asdasd
+      urlDos: /ased
+    recaudos:
+      urlBase: /recaudo
+      urlConsultarDepartamentos: /consultar-departamentos
+      urlConsultarRecaudos: /consultar-recaudos
+      urlConsultarValor: /consultar-valor
+      urlGuardar: /guardar
+      urlConsultar: /consultar
+    sorteos:
+      urlBase: /resultado-sorteos
+      urlConsultarResultados : /consultar-resultado-sorteos
+      urlConsultarResultadosSemanal : /consultar-resultado-sorteos-semanal
+distribuidor:
+  identificador: 9005140936
+  usuario-id: 30390480
+  cliente-id: 98647142
+  equipo-cliente-id: 1243
+  llave: MIIBtzCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9EAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYQAAoGAXH+Ce4LnN4iS7aqL/blEK7D+2A9Bi9ri6VsFr5k//mXhRyXvwcQftzH7bO/ssWWpRgai+zMOc2otVwr7EiG7GGrV8RngRHKO1C7kfK4Tc0V38bREa6F1lIi9vfNCZ3djVAppAiGepbjcOvV0oa8MyfpZEIge/gi669kHb2rCZGk=
+  clave: sbPz0W
+
+server:
+  servlet:
+    context-path: /dostf-apostar
+  port: 5000
+

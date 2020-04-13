@@ -3,14 +3,11 @@ package com.dostf.apostar.dtos.sorteos;
 import com.dostf.apostar.common.enums.ErrorEnum;
 import com.dostf.apostar.common.exceptions.MandatoryDtoMissingException;
 import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
-import com.dostf.apostar.common.exceptions.SecureDistribuidorException;
-import com.dostf.apostar.dtos.common.IValidateFields;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Getter
@@ -20,9 +17,7 @@ public class SorteosDto extends SorteosBaseDto{
     @JacksonXmlProperty(localName = "fecha-sorteo")
     private String fechaSorteo;
     private Long codigo;
-    @JacksonXmlProperty(localName = "transaccion-distribuidor-id")
 
-    
     public void validateMandatoryFields() {
         super.validateMandatoryFields();
         if (Objects.isNull(fechaSorteo))

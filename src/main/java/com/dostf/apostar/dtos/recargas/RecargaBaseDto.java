@@ -1,6 +1,7 @@
 package com.dostf.apostar.dtos.recargas;
 
 import com.dostf.apostar.common.enums.ErrorEnum;
+import com.dostf.apostar.common.exceptions.MandatoryFieldsMissingException;
 import com.dostf.apostar.common.exceptions.SecureDistribuidorException;
 import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +25,7 @@ public class RecargaBaseDto {
   @JsonInclude(JsonInclude.Include.NON_NULL)
   protected String codigoSubproducto;
   @JacksonXmlProperty(localName = "transaccion-distribuidor-id")
+  @NotNull
   protected Long transaccionDistribuidorId;
 
   public void validateMandatoryFields() {
@@ -31,7 +34,7 @@ public class RecargaBaseDto {
     }
     distribuidor.checkMandatoryFields(distribuidor);
     if (Objects.isNull(transaccionDistribuidorId)) {
-      transaccionDistribuidorId = UUID.randomUUID().getLeastSignificantBits();
+      throw new MandatoryFieldsMissingException(ErrorEnum.TRANSACCION_DISTRIBUIDOR_ID_IS_MANDATORY.getMessage());
     }
   }
 }

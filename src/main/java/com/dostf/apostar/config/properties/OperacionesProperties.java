@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "operaciones.api")
 public class OperacionesProperties {
-  private String urlBase;
-  private RecargasProperties recargas;
-  private SorteosProperties sorteos;
-  private RecaudosProperties recaudos;
+    private String urlBase;
+    private RecargasProperties recargas;
+    private SorteosProperties sorteos;
+    private RecaudosProperties recaudos;
+    private BetPlayProperties betPlay;
+    private PaquetesMovilesProperties paquetesMoviles;
+
 }

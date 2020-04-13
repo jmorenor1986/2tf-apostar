@@ -11,4 +11,7 @@ public class RecargasProperties {
   private String urlBase;
   private String urlRecargar;
   private String urlConsultarSubproducto;
+  private String urlConsultarParametros;
+  private String urlConsultarTopes;
+  private String urlConsultarParametrosPorSubproducto;
 }
