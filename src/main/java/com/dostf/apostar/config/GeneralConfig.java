@@ -30,6 +30,7 @@ public class GeneralConfig {
 
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(csf)
+                .setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
                 .build();
 
         HttpComponentsClientHttpRequestFactory requestFactory =
