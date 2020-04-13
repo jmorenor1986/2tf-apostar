@@ -1,7 +1,5 @@
 package com.dostf.apostar.controllers;
 
-import com.dostf.apostar.dtos.betplay.BetPlayDto;
-import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
 import com.dostf.apostar.services.IBetPlayService;
 import org.junit.Before;
 import org.junit.Test;

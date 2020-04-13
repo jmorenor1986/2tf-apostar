@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @Setter
