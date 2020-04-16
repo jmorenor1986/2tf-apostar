@@ -4,7 +4,6 @@ import com.dostf.apostar.config.properties.DistribuidorProperties;
 import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.PaquetesMovilesProperties;
 import com.dostf.apostar.dtos.paquetesMoviles.GuardarPaqueteMovilDto;
-import com.dostf.apostar.dtos.paquetesMoviles.PaqueteMovilDto;
 import com.dostf.apostar.dtos.paquetesMoviles.PaquetesMovilesDto;
 import com.dostf.apostar.dtos.paquetesMoviles.SubProductosPaquetesMovilesDto;
 import com.dostf.apostar.services.IPaquetesMovilesService;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import sun.security.provider.certpath.OCSPResponse;
 
 @Service
 public class PaquetesMovilesService implements IPaquetesMovilesService {

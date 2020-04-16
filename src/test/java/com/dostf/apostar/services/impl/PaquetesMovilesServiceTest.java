@@ -6,7 +6,6 @@ import com.dostf.apostar.config.properties.OperacionesProperties;
 import com.dostf.apostar.config.properties.PaquetesMovilesProperties;
 import com.dostf.apostar.dtos.paquetesMoviles.GuardarPaqueteMovilDto;
 import com.dostf.apostar.dtos.paquetesMoviles.PaqueteMovilDto;
-import com.dostf.apostar.dtos.paquetesMoviles.SubProductosPaquetesMovilesDto;
 import com.dostf.apostar.services.IPaquetesMovilesService;
 import com.dostf.apostar.services.IRestTemplateService;
 import org.junit.Assert;

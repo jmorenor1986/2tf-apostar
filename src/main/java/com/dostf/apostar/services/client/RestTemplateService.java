@@ -1,6 +1,5 @@
 package com.dostf.apostar.services.client;
 
-import com.dostf.apostar.common.interceptors.HttpRequestInterceptor;
 import com.dostf.apostar.services.IRestTemplateService;
 import com.dostf.apostar.services.IXmlApostarMapper;
 import com.dostf.apostar.services.mapper.XmlApostarMapper;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Optional;
 
 @Service

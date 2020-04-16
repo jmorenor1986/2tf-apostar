@@ -1,6 +1,5 @@
 package com.dostf.apostar.controllers;
 
-import com.dostf.apostar.dtos.betplay.BetPlayDto;
 import com.dostf.apostar.dtos.betplay.BetPlayPinDto;
 import com.dostf.apostar.dtos.betplay.BetPlayRecaudoDto;
 import com.dostf.apostar.dtos.betplay.BetPlayRetiroDto;
